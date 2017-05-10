@@ -1,5 +1,6 @@
 package com.yiguohan.easyreading.APIs;
 
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.yiguohan.easyreading.BuildConfig;
 
 import java.util.concurrent.TimeUnit;
@@ -7,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 import okhttp3.OkHttpClient;
 import retrofit2.CallAdapter;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -29,7 +30,7 @@ public class ApiRetrofit {
                 .baseUrl(DOUBAN_BASE_URL)
                 .client(builder.build())
                 .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
         doubanService = retrofit.create(DoubanApi.class);//通过create方法传入请求接口来返回一个实现，实现的具体内容Retrofit帮你封装好了，你只需要按照它制定的格式设计接口就行（工厂模式）
     }

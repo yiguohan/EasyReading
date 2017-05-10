@@ -1,6 +1,7 @@
 package com.yiguohan.easyreading.APIs;
 
 import com.yiguohan.easyreading.Beans.Book;
+import com.yiguohan.easyreading.Beans.BookList;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ public interface DoubanApi {
      * @param isbn 图书的ISBN号
      * @return
      */
-    @GET("v2/book/{isbn}")
+    @GET("v2/book/isbn/:{isbn}")
     Observable<Book> getBookByIBSN(@Path("isbn") String isbn);
 
     /**
@@ -35,7 +36,7 @@ public interface DoubanApi {
      * @return
      */
     @GET("v2/book/search")
-    Observable<List<Book>> getBookByTag(@Query("tag") String tag);
+    Observable<BookList> getBookByTag(@Query("tag") String tag);
 
     /**
      * 通过关键字查询图书信息
@@ -44,5 +45,5 @@ public interface DoubanApi {
      * @return
      */
     @GET("v2/book/search")
-    Observable<List<Book>> getBookByKeyword(@Query("q") String keyword);
+    Observable<BookList> getBookByKeyword(@Query("q") String keyword);
 }
