@@ -1,31 +1,53 @@
 package com.yiguohan.easyreading;
 
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.yiguohan.easyreading.APIs.ApiFactory;
-import com.yiguohan.easyreading.APIs.DoubanApi;
+import com.yiguohan.easyreading.Base.BaseActivity;
+import com.yiguohan.easyreading.Base.BasePresenter;
 import com.yiguohan.easyreading.Beans.Book;
-import com.yiguohan.easyreading.Beans.BookList;
+import com.yiguohan.easyreading.Presenters.DoubanBooksPresenter;
+import com.yiguohan.easyreading.Views.IGetBookView;
 
-import java.util.List;
+public class MainActivity extends BaseActivity implements IGetBookView {
 
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Function;
-import io.reactivex.schedulers.Schedulers;
 
-public class MainActivity extends AppCompatActivity {
+    private Button button;
+
+    private TextView textView;
+
+    private DoubanBooksPresenter presenter;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        button = (Button)findViewById(R.id.btn_test);
+        textView = (TextView)findViewById(R.id.txt_test);
+        presenter = new DoubanBooksPresenter(MainActivity.this);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.getBookByISBN(MainActivity.this,"9787508353937");
+            }
+        });
+    }
+
+    @Override
+    public void getBookSuccess(Book book) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(book.getTitle() + "\n")
+                .append(book.getAuthor());
+        textView.setText(sb.toString());
+    }
+
+    @Override
+    public void getBookFail() {
+
     }
 }
