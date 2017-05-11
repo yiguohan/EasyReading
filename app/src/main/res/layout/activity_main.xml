@@ -10,22 +10,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:orientation="vertical"
+        <FrameLayout
+            android:id="@+id/main_Framlayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <Button
-                android:id="@+id/btn_test"
+            <fragment
+                android:name="com.yiguohan.easyreading.ViewImpls.CurrentReadingFragment"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="execute"/>
+                android:layout_height="match_parent"/>
 
-            <TextView
-                android:id="@+id/txt_test"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
+
+        </FrameLayout>
 
 
 
