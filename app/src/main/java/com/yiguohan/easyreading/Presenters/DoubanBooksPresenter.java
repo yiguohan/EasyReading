@@ -4,18 +4,14 @@ package com.yiguohan.easyreading.Presenters;
 import android.content.Context;
 
 import com.yiguohan.easyreading.Base.BasePresenter;
-import com.yiguohan.easyreading.Beans.Book;
-import com.yiguohan.easyreading.Beans.BookList;
+import com.yiguohan.easyreading.Beans.DoubanBooks.Book;
+import com.yiguohan.easyreading.Beans.DoubanBooks.BookList;
 import com.yiguohan.easyreading.Views.IGetBookListView;
 import com.yiguohan.easyreading.Views.IGetBookView;
 
-import java.util.List;
-
-import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**

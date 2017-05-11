@@ -1,10 +1,7 @@
 package com.yiguohan.easyreading.Views;
 
 import com.yiguohan.easyreading.Base.IBaseView;
-import com.yiguohan.easyreading.Beans.Book;
-import com.yiguohan.easyreading.Beans.BookList;
-
-import java.util.List;
+import com.yiguohan.easyreading.Beans.DoubanBooks.BookList;
 
 /**
  * Created by yiguohan on 2017/5/10.

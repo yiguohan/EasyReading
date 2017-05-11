@@ -1,9 +1,7 @@
 package com.yiguohan.easyreading.APIs;
 
-import com.yiguohan.easyreading.Beans.Book;
-import com.yiguohan.easyreading.Beans.BookList;
-
-import java.util.List;
+import com.yiguohan.easyreading.Beans.DoubanBooks.Book;
+import com.yiguohan.easyreading.Beans.DoubanBooks.BookList;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;

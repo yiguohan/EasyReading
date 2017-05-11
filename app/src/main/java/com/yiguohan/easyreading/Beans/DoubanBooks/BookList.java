@@ -1,4 +1,6 @@
-package com.yiguohan.easyreading.Beans;
+package com.yiguohan.easyreading.Beans.DoubanBooks;
+
+import com.yiguohan.easyreading.Beans.DoubanBooks.Book;
 
 import java.util.List;
 
