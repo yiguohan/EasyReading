@@ -22,21 +22,21 @@ public interface DBApi {
      * @param user
      * @return
      */
-    boolean insertUser(User user);
+    Observable<Boolean> insertUser(User user);
 
     /**
      * 删除用户
      * @param id 用户id
      * @return
      */
-    boolean deleteUser(int id);
+    Observable<Boolean> deleteUser(int id);
 
     /**
      * 更新用户
      * @param user
      * @return
      */
-    boolean updateUser(User user);
+    Observable<Boolean> updateUser(User user);
 
     /**
      * 查询用户
@@ -52,21 +52,21 @@ public interface DBApi {
      * @param book
      * @return
      */
-    boolean insertMyBook(MyBook book);
+    Observable<Boolean> insertMyBook(MyBook book);
 
     /**
      * 删除正在阅读的书
      * @param id
      * @return
      */
-    boolean deleteMyBook(int id);
+    Observable<Boolean> deleteMyBook(int id);
 
     /**
      * 更新正在阅读的书的信息
      * @param book
      * @return
      */
-    boolean updateMyBook(MyBook book);
+    Observable<Boolean> updateMyBook(MyBook book);
 
     /**
      * 根据Id返回正在阅读的书的信息
@@ -89,21 +89,21 @@ public interface DBApi {
      * @param record
      * @return
      */
-    boolean insertReadingRecord(ReadingRecord record);
+    Observable<Boolean> insertReadingRecord(ReadingRecord record);
 
     /**
      * 删除阅读记录（必要性？）
      * @param id
      * @return
      */
-    boolean deleteReadingRecord(int id);
+    Observable<Boolean> deleteReadingRecord(int id);
 
     /**
      * 更新阅读记录（必要性？）
      * @param record
      * @return
      */
-    boolean updateReadingRecord(ReadingRecord record);
+    Observable<Boolean> updateReadingRecord(ReadingRecord record);
 
     /**
      * 根据阅读记录Id查询阅读记录（必要性？）

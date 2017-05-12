@@ -8,6 +8,7 @@ package com.yiguohan.easyreading.APIs;
 public class ApiFactory {
 
     static DoubanApi doubanService = null;
+    static DBApi dbService = null;
     static Object lock = new Object();
 
     public static synchronized DoubanApi getDoubanService() {
@@ -18,6 +19,16 @@ public class ApiFactory {
         }
 
         return doubanService;
+    }
+
+    public static synchronized DBApi getDbService(){
+        synchronized (lock){
+            if (dbService == null){
+                dbService = new DBManager().getDBService();
+            }
+
+        }
+        return dbService;
     }
 
 }
