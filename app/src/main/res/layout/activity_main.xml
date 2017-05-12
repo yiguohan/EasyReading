@@ -16,7 +16,7 @@
             android:layout_height="match_parent">
 
             <fragment
-                android:name="com.yiguohan.easyreading.ViewImpls.CurrentReadingFragment"
+                android:name="com.yiguohan.easyreading.ViewImpls.HomeFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 

@@ -1,5 +1,12 @@
 package com.yiguohan.easyreading.APIs;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
+import com.squareup.sqlbrite.BriteDatabase;
+import com.squareup.sqlbrite.SqlBrite;
 import com.yiguohan.easyreading.Beans.MyBook;
 import com.yiguohan.easyreading.Beans.ReadingRecord;
 import com.yiguohan.easyreading.Beans.User;
@@ -7,29 +14,111 @@ import com.yiguohan.easyreading.Beans.User;
 import java.util.List;
 
 import io.reactivex.Observable;
+import io.reactivex.internal.operators.observable.ObservableJust;
+import rx.schedulers.Schedulers;
 
 /**
- *
  * Created by yiguohan on 2017/5/12.
  * Email:yiguohan@gmail.com
  */
 
-public class DBManager  {
+public class DBManager{
 
     private DBApi dbService;
 
-    /**
-     * 构造函数中需要：
-     * 1.获取DBApi的实例
-     * 2.判断当前是否存在数据表
-     *      2.1 不存在则创建数据表
-     *      2.2 存在
-     */
-    public DBManager() {
+    private static ContentValues contentValues;
 
+    public DBManager(Context mContext) {
+        initDBService(mContext);
     }
 
-    public DBApi getDBService(){
+    public DBApi getDBService() {
         return dbService;
     }
+
+    private DBApi initDBService(Context mContext){
+        final BriteDatabase db = new SqlBrite.Builder().build().wrapDatabaseHelper(new DBHelper(mContext, "EazyReading.db", null, 1), Schedulers.io());
+        dbService = new DBApi() {
+            @Override
+            public Observable<Long> insertUser(User user) {
+                contentValues = new ContentValues();
+                contentValues.put("Id",user.getId());
+                contentValues.put("Account",user.getAccount());
+                contentValues.put("Password",user.getPassword());
+                return new ObservableJust<Long>(Long.valueOf(db.insert("User",contentValues)));
+            }
+
+            @Override
+            public Observable<Boolean> deleteUser(int id) {
+                return null;
+            }
+
+            @Override
+            public Observable<Boolean> updateUser(User user) {
+                return null;
+            }
+
+            @Override
+            public Observable<User> getUserbyAccount(String account, String password) {
+                return null;
+            }
+
+            @Override
+            public Observable<Boolean> insertMyBook(MyBook book) {
+                return null;
+            }
+
+            @Override
+            public Observable<Boolean> deleteMyBook(int id) {
+                return null;
+            }
+
+            @Override
+            public Observable<Boolean> updateMyBook(MyBook book) {
+                return null;
+            }
+
+            @Override
+            public Observable<MyBook> getMyBookById(int id) {
+                return null;
+            }
+
+            @Override
+            public Observable<List<MyBook>> getMyBooksByUserId(int userId) {
+                return null;
+            }
+
+            @Override
+            public Observable<Boolean> insertReadingRecord(ReadingRecord record) {
+                return null;
+            }
+
+            @Override
+            public Observable<Boolean> deleteReadingRecord(int id) {
+                return null;
+            }
+
+            @Override
+            public Observable<Boolean> updateReadingRecord(ReadingRecord record) {
+                return null;
+            }
+
+            @Override
+            public Observable<ReadingRecord> getReadingRecordById(int id) {
+                return null;
+            }
+
+            @Override
+            public Observable<ReadingRecord> getLatestRedingRecord() {
+                return null;
+            }
+
+            @Override
+            public Observable<List<ReadingRecord>> getReadingRecordsByUserId(int userId) {
+                return null;
+            }
+        };
+        return dbService;
+    }
+
 }

@@ -8,6 +8,7 @@ import java.util.List;
 
 import io.reactivex.Observable;
 
+
 /**
  * 数据库访问接口
  * Created by yiguohan on 2017/5/12.
@@ -22,7 +23,7 @@ public interface DBApi {
      * @param user
      * @return
      */
-    Observable<Boolean> insertUser(User user);
+    Observable<Long> insertUser(User user);
 
     /**
      * 删除用户
