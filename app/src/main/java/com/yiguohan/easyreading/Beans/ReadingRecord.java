@@ -8,6 +8,14 @@ import java.util.Date;
  */
 
 public class ReadingRecord {
+    /**
+     * 阅读记录
+     * id 阅读记录的id
+     * userId 用户表的id
+     * bookId Book表的id
+     * currentPage 当前阅读的页数
+     * timeStamp 时间戳
+     */
     private int id;
     private int userId;
     private int bookId;
