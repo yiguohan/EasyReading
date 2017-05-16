@@ -1,5 +1,7 @@
 package com.yiguohan.easyreading.APIs;
 
+import android.database.Cursor;
+
 import com.yiguohan.easyreading.Beans.MyBook;
 import com.yiguohan.easyreading.Beans.ReadingRecord;
 import com.yiguohan.easyreading.Beans.User;
@@ -28,16 +30,16 @@ public interface DBApi {
     /**
      * 删除用户
      * @param id 用户id
-     * @return
+     * @return 删除的行数
      */
-    Observable<Boolean> deleteUser(int id);
+    Observable<Integer> deleteUser(int id);
 
     /**
      * 更新用户
      * @param user
-     * @return
+     * @return 更改的行数
      */
-    Observable<Boolean> updateUser(User user);
+    Observable<Integer> updateUser(User user);
 
     /**
      * 查询用户
@@ -45,7 +47,7 @@ public interface DBApi {
      * @param password
      * @return
      */
-    Observable<User> getUserbyAccount(String account,String password);
+    Observable<Cursor> getUserbyAccount(String account, String password);
 
     /*----------------------------------------Mybook---------------------------------------*/
     /**
