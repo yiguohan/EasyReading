@@ -36,6 +36,12 @@ public class DBManager{
         return dbService;
     }
 
+    /**
+     * 初始化数据库服务
+     * 戒指2017年5月16日，Sqlbrite作者在GitHub上未发布支持RxJava2的Adapter,所以此处暂不适用Sqlbrite
+     * @param mContext
+     * @return
+     */
     private DBApi initDBService(Context mContext){
         final BriteDatabase db = new SqlBrite.Builder().build().wrapDatabaseHelper(new DBHelper(mContext, "EazyReading.db", null, 1), Schedulers.io());
         dbService = new DBApi() {
