@@ -60,8 +60,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.btn_insert:
                 User user = new User();
-                user.setAccount("123123");
-                user.setPassword("123123");
+                user.setAccount("yiguohan");
+                user.setPassword("19920207");
                 ApiFactory.getDbService(getContext()).insertUser(user)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
@@ -73,7 +73,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         });
                 break;
             case R.id.btn_delete:
-                ApiFactory.getDbService(getContext()).deleteUser(1)
+                ApiFactory.getDbService(getContext()).deleteUser(11)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Consumer<Integer>() {
@@ -84,9 +84,22 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         });
                 break;
             case R.id.btn_update:
+                User user1 = new User();
+                user1.setId(12);
+                user1.setAccount("yiguohan");
+                user1.setPassword("19920207");
+                ApiFactory.getDbService(getContext()).updateUser(user1)
+                        .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Consumer<Integer>() {
+                        @Override
+                        public void accept(Integer integer) throws Exception {
+                            Toast.makeText(getContext(), "已修改行数： " + integer, Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 break;
             case R.id.btn_query:
-                ApiFactory.getDbService(getContext()).getUserbyAccount("123123","123123")
+                ApiFactory.getDbService(getContext()).getUserbyAccount("yiguohan","19920207")
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Consumer<Cursor>() {
@@ -95,6 +108,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                                 StringBuilder sb = new StringBuilder();
                                 if (cursor.moveToFirst()){
                                     do {
+                                        sb.append(cursor.getString(cursor.getColumnIndex("id")));
+                                        sb.append(" ");
                                         sb.append(cursor.getString(cursor.getColumnIndex("account")));
                                         sb.append(" ");
                                         sb.append(cursor.getString(cursor.getColumnIndex("password")));

@@ -55,21 +55,20 @@ public class DBManager {
                 ContentValues contentValues = new ContentValues();
                 contentValues.put("account", user.getAccount());
                 contentValues.put("password", user.getPassword());
-                return new ObservableJust<Long>(Long.valueOf(db.insert("User", null, contentValues)));
+                return new ObservableJust<Long>(db.insert("User", null, contentValues));
             }
 
             @Override
             public Observable<Integer> deleteUser(int id) {
-                db.delete("User", "id = ?", new String[]{String.valueOf(id)});
-                return new ObservableJust<Integer>(Integer.valueOf(db.delete("User", "id = ?", new String[]{String.valueOf(id)})));
+                return new ObservableJust<Integer>(db.delete("User", "id = ?", new String[]{String.valueOf(id)}));
             }
 
             @Override
             public Observable<Integer> updateUser(User user) {
                 ContentValues contentValues = new ContentValues();
-                contentValues.put("account", "yiguohan");
-                contentValues.put("password", "12345");
-                return new ObservableJust<>(db.update("User", contentValues, "id = ?", new String[]{String.valueOf(user.getId())}));
+                contentValues.put("account", user.getAccount());
+                contentValues.put("password", user.getPassword());
+                return new ObservableJust<Integer>(db.update("User", contentValues, "id = ?", new String[]{String.valueOf(user.getId())}));
             }
 
             @Override
@@ -78,58 +77,87 @@ public class DBManager {
             }
 
             @Override
-            public Observable<Boolean> insertMyBook(MyBook book) {
-                return null;
+            public Observable<Long> insertMyBook(MyBook book) {
+                ContentValues contentValues = new ContentValues();
+                contentValues.put("id",book.getId());
+                contentValues.put("bookId",book.getBookId());
+                contentValues.put("userId",book.getUserId());
+                contentValues.put("title",book.getTitle());
+                contentValues.put("imageUrl",book.getImageUrl());
+                contentValues.put("currentPage",book.getCurrentPage());
+                contentValues.put("totalPage",book.getTotalPage());
+                contentValues.put("process",book.getProcess());
+
+                return new ObservableJust<Long>(db.insert("MyBook",null,contentValues));
             }
 
             @Override
-            public Observable<Boolean> deleteMyBook(int id) {
-                return null;
+            public Observable<Integer> deleteMyBook(int id) {
+                return new ObservableJust<Integer>(db.delete("MyBook", "id = ?", new String[]{String.valueOf(id)}));
             }
 
             @Override
-            public Observable<Boolean> updateMyBook(MyBook book) {
-                return null;
+            public Observable<Integer> updateMyBook(MyBook book) {
+                ContentValues contentValues = new ContentValues();
+                contentValues.put("bookId",book.getBookId());
+                contentValues.put("userId",book.getUserId());
+                contentValues.put("title",book.getTitle());
+                contentValues.put("imageUrl",book.getImageUrl());
+                contentValues.put("currentPage",book.getCurrentPage());
+                contentValues.put("totalPage",book.getTotalPage());
+                contentValues.put("process",book.getProcess());
+                return new ObservableJust<>(db.update("MyBook",contentValues,"id = ?",new String[]{String.valueOf(book.getId())}));
             }
 
             @Override
-            public Observable<MyBook> getMyBookById(int id) {
-                return null;
+            public Observable<Cursor> getMyBookById(int id) {
+                return new ObservableJust<Cursor>(db.rawQuery("select * from MyBook where id = ?",new String[]{String.valueOf(id)}));
             }
 
             @Override
-            public Observable<List<MyBook>> getMyBooksByUserId(int userId) {
-                return null;
+            public Observable<Cursor> getMyBooksByUserId(int userId) {
+                return new ObservableJust<Cursor>(db.rawQuery("select * from MyBook where userId = ?",new String[]{String.valueOf(userId)}));
             }
 
             @Override
-            public Observable<Boolean> insertReadingRecord(ReadingRecord record) {
-                return null;
+            public Observable<Long> insertReadingRecord(ReadingRecord record) {
+                ContentValues contentValues = new ContentValues();
+                contentValues.put("id",record.getId());
+                contentValues.put("userId",record.getUserId());
+                contentValues.put("bookId",record.getBookId());
+                contentValues.put("currentPage",record.getCurrentPage());
+                contentValues.put("timeStamp",record.getTimeStamp().toString());
+                return new ObservableJust<Long>(db.insert("ReadingRecord",null,contentValues));
             }
 
             @Override
-            public Observable<Boolean> deleteReadingRecord(int id) {
-                return null;
+            public Observable<Integer> deleteReadingRecord(int id) {
+                return new ObservableJust<Integer>(db.delete("MyBook","id = ?",new String[]{String.valueOf(id)}));
             }
 
             @Override
-            public Observable<Boolean> updateReadingRecord(ReadingRecord record) {
-                return null;
+            public Observable<Integer> updateReadingRecord(ReadingRecord record) {
+                ContentValues contentValues = new ContentValues();
+                contentValues.put("userId",record.getUserId());
+                contentValues.put("bookId",record.getBookId());
+                contentValues.put("currentPage",record.getCurrentPage());
+                contentValues.put("timeStamp",record.getTimeStamp().toString());
+                return new ObservableJust<Integer>(db.update("MyBook",contentValues,"id = ?",new String[]{String.valueOf(record.getId())}));
             }
 
             @Override
-            public Observable<ReadingRecord> getReadingRecordById(int id) {
-                return null;
+            public Observable<Cursor> getReadingRecordById(int id) {
+                return new ObservableJust<Cursor>(db.rawQuery("select * from ReadingRecord where id = ?",new String[]{String.valueOf(id)}));
             }
 
             @Override
-            public Observable<ReadingRecord> getLatestRedingRecord() {
-                return null;
+            public Observable<Cursor> getLatestRedingRecord() {
+                return new ObservableJust<Cursor>(db.rawQuery("select top 1 * from ReadingRecord orderby id desc",null));
             }
 
             @Override
-            public Observable<List<ReadingRecord>> getReadingRecordsByUserId(int userId) {
-                return null;
+            public Observable<Cursor> getReadingRecordsByUserId(int userId) {
+                return new ObservableJust<Cursor>(db.rawQuery("select * from ReadingRecord where userId = ?",new String[]{String.valueOf(userId)}));
             }
         };
         return dbService;

@@ -53,37 +53,37 @@ public interface DBApi {
     /**
      * 添加正在阅读的书
      * @param book
-     * @return
+     * @return 返回当前的最大行数
      */
-    Observable<Boolean> insertMyBook(MyBook book);
+    Observable<Long> insertMyBook(MyBook book);
 
     /**
      * 删除正在阅读的书
      * @param id
      * @return
      */
-    Observable<Boolean> deleteMyBook(int id);
+    Observable<Integer> deleteMyBook(int id);
 
     /**
      * 更新正在阅读的书的信息
      * @param book
      * @return
      */
-    Observable<Boolean> updateMyBook(MyBook book);
+    Observable<Integer> updateMyBook(MyBook book);
 
     /**
      * 根据Id返回正在阅读的书的信息
      * @param id
      * @return
      */
-    Observable<MyBook> getMyBookById(int id);
+    Observable<Cursor> getMyBookById(int id);
 
     /**
      * 根据用户Id返回用户正在阅读的书的列表
      * @param userId
      * @return
      */
-    Observable<List<MyBook>> getMyBooksByUserId(int userId);
+    Observable<Cursor> getMyBooksByUserId(int userId);
 
     /*----------------------------------------ReadingRecord---------------------------------------*/
 
@@ -92,39 +92,39 @@ public interface DBApi {
      * @param record
      * @return
      */
-    Observable<Boolean> insertReadingRecord(ReadingRecord record);
+    Observable<Long> insertReadingRecord(ReadingRecord record);
 
     /**
      * 删除阅读记录（必要性？）
      * @param id
      * @return
      */
-    Observable<Boolean> deleteReadingRecord(int id);
+    Observable<Integer> deleteReadingRecord(int id);
 
     /**
      * 更新阅读记录（必要性？）
      * @param record
      * @return
      */
-    Observable<Boolean> updateReadingRecord(ReadingRecord record);
+    Observable<Integer> updateReadingRecord(ReadingRecord record);
 
     /**
      * 根据阅读记录Id查询阅读记录（必要性？）
      * @param id
      * @return
      */
-    Observable<ReadingRecord> getReadingRecordById(int id);
+    Observable<Cursor> getReadingRecordById(int id);
 
     /**
      * 查询最新的阅读记录
      * @return
      */
-    Observable<ReadingRecord> getLatestRedingRecord();
+    Observable<Cursor> getLatestRedingRecord();
 
     /**
      * 根据用户Id返回阅读记录列表
      * @param userId
      * @return
      */
-    Observable<List<ReadingRecord>> getReadingRecordsByUserId(int userId);
+    Observable<Cursor> getReadingRecordsByUserId(int userId);
 }
