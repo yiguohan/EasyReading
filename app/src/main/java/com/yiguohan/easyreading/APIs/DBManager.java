@@ -121,7 +121,6 @@ public class DBManager {
             @Override
             public Observable<Long> insertReadingRecord(ReadingRecord record) {
                 ContentValues contentValues = new ContentValues();
-                contentValues.put("id",record.getId());
                 contentValues.put("userId",record.getUserId());
                 contentValues.put("bookId",record.getBookId());
                 contentValues.put("currentPage",record.getCurrentPage());
