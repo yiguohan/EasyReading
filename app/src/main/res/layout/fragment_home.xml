@@ -1,9 +1,29 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.yiguohan.easyreading.ViewImpls.HomeFragment">
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/currentReading_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="55dp"
+        android:clipToPadding="false"
+        android:background="#D7D7D7"/>
+
+    <com.arlib.floatingsearchview.FloatingSearchView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:floatingSearch_dismissOnOutsideTouch="true"
+        app:floatingSearch_suggestionsListAnimDuration="250"
+        app:floatingSearch_dimBackground="false"
+        app:floatingSearch_close_search_on_keyboard_dismiss="false"
+        app:floatingSearch_leftActionMode="showHamburger">
 
 
-</FrameLayout>
+    </com.arlib.floatingsearchview.FloatingSearchView>
+
+
+</android.support.design.widget.CoordinatorLayout>
