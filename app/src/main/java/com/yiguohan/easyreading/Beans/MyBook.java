@@ -54,12 +54,12 @@ public class MyBook {
         this.bookId = bookId;
     }
 
-    public int getProcess() {
+    public long getProcess() {
         if (TextUtils.isEmpty(currentPage)||(TextUtils.isEmpty(totalPage))){
             return 0;
         }
-        int current = Integer.valueOf(currentPage);
-        int total = Integer.valueOf(totalPage);
+        long current = Long.valueOf(currentPage);
+        long total = Long.valueOf(totalPage);
         return current/total;
     }
 

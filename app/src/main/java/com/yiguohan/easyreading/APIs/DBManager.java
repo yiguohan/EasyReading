@@ -79,7 +79,6 @@ public class DBManager {
             @Override
             public Observable<Long> insertMyBook(MyBook book) {
                 ContentValues contentValues = new ContentValues();
-                contentValues.put("id",book.getId());
                 contentValues.put("bookId",book.getBookId());
                 contentValues.put("userId",book.getUserId());
                 contentValues.put("title",book.getTitle());

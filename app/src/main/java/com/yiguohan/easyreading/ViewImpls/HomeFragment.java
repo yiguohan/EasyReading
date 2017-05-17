@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yiguohan.easyreading.APIs.ApiFactory;
+import com.yiguohan.easyreading.Beans.MyBook;
 import com.yiguohan.easyreading.Beans.User;
 import com.yiguohan.easyreading.R;
 
@@ -59,10 +60,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_insert:
-                User user = new User();
-                user.setAccount("yiguohan");
-                user.setPassword("19920207");
-                ApiFactory.getDbService(getContext()).insertUser(user)
+                MyBook book = new MyBook();
+                book.setTotalPage("100");
+                book.setUserId(1);
+                book.setCurrentPage("99");
+                book.setTitle("Test");
+                book.setImageUrl("Url");
+                book.setBookId(1);
+                ApiFactory.getDbService(getContext()).insertMyBook(book)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Consumer<Long>() {
@@ -73,7 +78,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         });
                 break;
             case R.id.btn_delete:
-                ApiFactory.getDbService(getContext()).deleteUser(11)
+                ApiFactory.getDbService(getContext()).deleteMyBook(2)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Consumer<Integer>() {
@@ -84,11 +89,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         });
                 break;
             case R.id.btn_update:
-                User user1 = new User();
-                user1.setId(12);
-                user1.setAccount("yiguohan");
-                user1.setPassword("19920207");
-                ApiFactory.getDbService(getContext()).updateUser(user1)
+                MyBook mbook = new MyBook();
+                mbook.setBookId(321321321);
+                mbook.setCurrentPage("321321321");
+                mbook.setImageUrl("murl");
+                mbook.setTitle("mtitle");
+                mbook.setTotalPage("99999");
+                mbook.setCurrentPage("99");
+                mbook.setUserId(321);
+                ApiFactory.getDbService(getContext()).updateMyBook(mbook)
                         .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new Consumer<Integer>() {
@@ -99,7 +108,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     });
                 break;
             case R.id.btn_query:
-                ApiFactory.getDbService(getContext()).getUserbyAccount("yiguohan","19920207")
+                ApiFactory.getDbService(getContext()).getMyBookById(3)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Consumer<Cursor>() {
@@ -110,9 +119,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                                     do {
                                         sb.append(cursor.getString(cursor.getColumnIndex("id")));
                                         sb.append(" ");
-                                        sb.append(cursor.getString(cursor.getColumnIndex("account")));
+                                        sb.append(cursor.getString(cursor.getColumnIndex("currentPage")));
                                         sb.append(" ");
-                                        sb.append(cursor.getString(cursor.getColumnIndex("password")));
+                                        sb.append(cursor.getString(cursor.getColumnIndex("bookId")));
                                         sb.append("\n");
                                     }while (cursor.moveToNext());
 

@@ -20,6 +20,7 @@ public class DBHelper extends SQLiteOpenHelper {
             "userId integer," +
             "bookId integer," +
             "title text," +
+            "process real," +
             "imageUrl text," +
             "currentPage text," +
             "totalPage text)";
