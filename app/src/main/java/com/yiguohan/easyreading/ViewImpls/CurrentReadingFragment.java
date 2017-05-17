@@ -46,7 +46,6 @@ public class CurrentReadingFragment extends BaseFragment implements IGetBookList
         initData();
         View view = inflater.inflate(R.layout.fragment_current_reading, container, false);
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.currentReading_recyclerview);
-
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(),1);
         recyclerView.setLayoutManager(layoutManager);
         adapter = new BookAdapter(books);

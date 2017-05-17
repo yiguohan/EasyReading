@@ -22,11 +22,11 @@ import java.util.List;
 
 public class DoubanBookAdapter extends RecyclerView.Adapter<DoubanBookAdapter.ViewHolder> {
 
-    List<Book> books;
+    List<Book> bookList;
     Context mContext;
 
     public DoubanBookAdapter(List<Book> books) {
-        this.books = books;
+        this.bookList = books;
     }
 
     @Override
@@ -34,13 +34,13 @@ public class DoubanBookAdapter extends RecyclerView.Adapter<DoubanBookAdapter.Vi
        if (mContext == null){
            mContext = parent.getContext();
        }
-       View view = LayoutInflater.from(mContext).inflate(R.layout.douban_book_item,parent);
+       View view = LayoutInflater.from(mContext).inflate(R.layout.douban_book_item,null);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-       Book book = books.get(position);
+       Book book = bookList.get(position);
         Glide.with(mContext).load(book.getImage()).fitCenter().into(holder.imageView);
         holder.txt_rating.setText("评分：10.0");
         holder.txt_title.setText(book.getTitle());
@@ -48,17 +48,15 @@ public class DoubanBookAdapter extends RecyclerView.Adapter<DoubanBookAdapter.Vi
 
     @Override
     public int getItemCount() {
-        return books.size();
+        return this.bookList.size();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder{
-        CardView cardView;
         ImageView imageView;
         TextView txt_title;
         TextView txt_rating;
         public ViewHolder(View itemView) {
             super(itemView);
-            cardView = (CardView)itemView.findViewById(R.id.cardView_DoubanBook);
             imageView = (ImageView)itemView.findViewById(R.id.img_DoubanBook_item);
             txt_title = (TextView)itemView.findViewById(R.id.txt_DoubanBook_title);
             txt_rating = (TextView)itemView.findViewById(R.id.txt_DoubanBook_Rating);
