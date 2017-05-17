@@ -49,7 +49,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
         if (mContext == null){
             mContext = parent.getContext();
         }
-        View view = LayoutInflater.from(mContext).inflate(R.layout.book_item,parent,false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.my_book_item,parent,false);
         return new ViewHolder(view);
     }
 
