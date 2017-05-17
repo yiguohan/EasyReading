@@ -6,10 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.yiguohan.easyreading.APIs.ApiFactory;
-import com.yiguohan.easyreading.APIs.DBApi;
-import com.yiguohan.easyreading.APIs.DoubanApi;
 import com.yiguohan.easyreading.Adapters.DoubanBookAdapter;
 import com.yiguohan.easyreading.Beans.DoubanBooks.Book;
 import com.yiguohan.easyreading.Beans.DoubanBooks.BookList;

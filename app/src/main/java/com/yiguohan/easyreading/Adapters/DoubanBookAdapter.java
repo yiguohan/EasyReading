@@ -1,6 +1,8 @@
 package com.yiguohan.easyreading.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.yiguohan.easyreading.Beans.DoubanBooks.Book;
@@ -35,7 +38,18 @@ public class DoubanBookAdapter extends RecyclerView.Adapter<DoubanBookAdapter.Vi
            mContext = parent.getContext();
        }
        View view = LayoutInflater.from(mContext).inflate(R.layout.douban_book_item,null);
-        return new ViewHolder(view);
+        final ViewHolder holder = new ViewHolder(view);
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = holder.getAdapterPosition();
+                Book book = bookList.get(position);
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(book.getAlt()));
+                mContext.startActivity(intent);
+            }
+        });
+        return holder;
     }
 
     @Override
