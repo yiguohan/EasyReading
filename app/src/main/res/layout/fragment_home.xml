@@ -5,41 +5,5 @@
     tools:context="com.yiguohan.easyreading.ViewImpls.HomeFragment">
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <Button
-            android:id="@+id/btn_insert"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Insert" />
-
-        <Button
-            android:id="@+id/btn_delete"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Delete" />
-
-        <Button
-            android:id="@+id/btn_update"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Update" />
-
-        <Button
-            android:id="@+id/btn_query"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Query" />
-
-        <TextView
-            android:id="@+id/txt_test"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment" />
-    </LinearLayout>
-
 
 </FrameLayout>
