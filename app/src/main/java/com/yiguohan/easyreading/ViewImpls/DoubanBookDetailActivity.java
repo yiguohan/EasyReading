@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide;
 import com.yiguohan.easyreading.Beans.DoubanBooks.Book;
 import com.yiguohan.easyreading.Presenters.DoubanBooksPresenter;
 import com.yiguohan.easyreading.R;
+import com.yiguohan.easyreading.Utils.Util;
 import com.yiguohan.easyreading.Views.IGetBookView;
 
 import org.w3c.dom.Text;
@@ -49,7 +50,7 @@ public class DoubanBookDetailActivity extends AppCompatActivity implements IGetB
                 override(300,300).
                 fitCenter().
                 into(img_Cover);
-        txt_Title.setText(book.getTitle());
+        txt_Title.setText(Util.getFormatedBookDetail(book));
         collapsingToolbar.setTitle(book.getTitle());
     }
 

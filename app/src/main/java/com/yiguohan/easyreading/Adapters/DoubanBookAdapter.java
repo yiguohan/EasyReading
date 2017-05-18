@@ -57,7 +57,7 @@ public class DoubanBookAdapter extends RecyclerView.Adapter<DoubanBookAdapter.Vi
     public void onBindViewHolder(ViewHolder holder, int position) {
        Book book = bookList.get(position);
         Glide.with(mContext).load(book.getImage()).fitCenter().into(holder.imageView);
-        holder.txt_rating.setText("评分：10.0");
+        holder.txt_rating.setText("评分："+ book.getRating().getAverage());
         holder.txt_title.setText(book.getTitle());
     }
 
