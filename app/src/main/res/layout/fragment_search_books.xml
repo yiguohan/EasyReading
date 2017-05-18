@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/search_recyclerView"
+        android:id="@+id/searchBooks_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingTop="55dp"
@@ -13,6 +13,7 @@
         android:background="#D7D7D7"/>
 
     <com.arlib.floatingsearchview.FloatingSearchView
+        android:id="@+id/searchBooks_FloatingSearchView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:floatingSearch_dismissOnOutsideTouch="true"
