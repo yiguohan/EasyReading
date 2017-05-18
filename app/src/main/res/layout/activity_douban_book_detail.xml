@@ -13,6 +13,7 @@
         android:layout_height="250dp">
 
         <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsingToolbar_doubanBookDetail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
@@ -21,8 +22,10 @@
 
             <ImageView
                 android:id="@+id/img_doubanBookDetail"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
                 android:scaleType="centerCrop"
                 app:layout_collapseMode="parallax" />
 
