@@ -14,13 +14,13 @@ public class DoubanBookDetailActivity extends AppCompatActivity implements IGetB
 
     private DoubanBooksPresenter presenter;
 
-    private TextView textView;
+//    private TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_douban_book_detail);
-        textView = (TextView)findViewById(R.id.txt_BookDetail);
+//        textView = (TextView)findViewById(R.id.txt_BookDetail);
         presenter = new DoubanBooksPresenter(this);
         Intent intent = getIntent();
         presenter.getBookById(this,intent.getStringExtra("BookId"));
@@ -28,10 +28,10 @@ public class DoubanBookDetailActivity extends AppCompatActivity implements IGetB
 
     @Override
     public void getBookSuccess(Book book) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(book.getTitle() + "\n")
-                .append(book.getAuthor()+"\n");
-        textView.setText(sb.toString());
+//        StringBuilder sb = new StringBuilder();
+//        sb.append(book.getTitle() + "\n")
+//                .append(book.getAuthor()+"\n");
+//        textView.setText(sb.toString());
     }
 
     @Override
