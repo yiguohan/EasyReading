@@ -18,7 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Base.BaseActivity"></activity>
+        <activity android:name=".Base.BaseActivity" />
+        <activity android:name=".ViewImpls.DoubanBookDetailActivity"></activity>
     </application>
 
 </manifest>

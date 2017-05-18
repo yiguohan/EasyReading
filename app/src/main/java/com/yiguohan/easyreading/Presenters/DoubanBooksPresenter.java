@@ -32,7 +32,7 @@ public class DoubanBooksPresenter extends BasePresenter {
                 .subscribe(new Consumer<Book>() {
                     @Override
                     public void accept(@NonNull Book book) throws Exception {
-                        displayBookDetail(view,book);
+                        displayBookDetail(view, book);
                     }
                 });
 
@@ -45,7 +45,7 @@ public class DoubanBooksPresenter extends BasePresenter {
                 .subscribe(new Consumer<BookList>() {
                     @Override
                     public void accept(@NonNull BookList list) throws Exception {
-                        displayBookList(view,list);
+                        displayBookList(view, list);
                     }
                 });
 
@@ -59,7 +59,19 @@ public class DoubanBooksPresenter extends BasePresenter {
                 .subscribe(new Consumer<BookList>() {
                     @Override
                     public void accept(@NonNull BookList list) throws Exception {
-                        displayBookList(view,list);
+                        displayBookList(view, list);
+                    }
+                });
+    }
+
+    public void getBookById(final IGetBookView view, String id) {
+        doubanService.getBookById(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Book>() {
+                    @Override
+                    public void accept(Book book) throws Exception {
+                        displayBookDetail(view, book);
                     }
                 });
     }
@@ -68,11 +80,11 @@ public class DoubanBooksPresenter extends BasePresenter {
         view.getBookSuccess(b);
     }
 
-    private void displayBookList(IGetBookListView view, BookList list){
-        view.getBookListSuccess(list,false);
+    private void displayBookList(IGetBookListView view, BookList list) {
+        view.getBookListSuccess(list, false);
     }
 
-    private void displayError(Throwable throwable){
+    private void displayError(Throwable throwable) {
         throwable.printStackTrace();
 
     }

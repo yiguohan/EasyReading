@@ -18,6 +18,14 @@ import retrofit2.http.Query;
 public interface DoubanApi {
 
     /**
+     * 通过图书Id来检索图书信息
+     * @param id
+     * @return
+     */
+    @GET("v2/book/{id}")
+    Observable<Book> getBookById(@Path("id") String id);
+
+    /**
      * 通过ISBN号来查询图书信息
      * 用于扫描二维码后获取ISBN号后调用
      *
