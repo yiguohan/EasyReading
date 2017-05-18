@@ -35,7 +35,8 @@ public class DoubanBooksFragment extends Fragment  implements IGetBookListView{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        this.bookTag = savedInstanceState.getString("TAG","Design");
+//        this.bookTag = savedInstanceState.getString("TAG","Design");
+        this.bookTag = this.getArguments().getString("TAG","Design");
         initData();
         View view = inflater.inflate(R.layout.fragment_douban_books, container, false);
         RecyclerView recyclerView = (RecyclerView)view.findViewById(R.id.douban_recyclerView);
