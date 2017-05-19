@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Base.BaseActivity" />
-        <activity android:name=".ViewImpls.DoubanBookDetailActivity"></activity>
+        <activity android:name=".ViewImpls.DoubanBookDetailActivity" />
+        <activity android:name=".ViewImpls.MyBookDetailActivity"></activity>
     </application>
 
 </manifest>
