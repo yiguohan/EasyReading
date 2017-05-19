@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.yiguohan.easyreading.Beans.DoubanBooks.Book;
 import com.yiguohan.easyreading.R;
-import com.yiguohan.easyreading.ViewImpls.MyBookDetailActivity;
+import com.yiguohan.easyreading.ViewImpls.CurrentReadingDetailActivity;
 
 import java.util.List;
 
@@ -56,7 +56,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, MyBookDetailActivity.class);
+                Intent intent = new Intent(mContext, CurrentReadingDetailActivity.class);
                 mContext.startActivity(intent);
             }
         });

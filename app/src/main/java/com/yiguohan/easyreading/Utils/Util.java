@@ -2,7 +2,9 @@ package com.yiguohan.easyreading.Utils;
 
 import com.yiguohan.easyreading.Beans.DoubanBooks.Book;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -50,5 +52,10 @@ public class Util {
                 .append(book.getCatalog());
 
         return sb.toString();
+    }
+
+    public static String getFormatDate(Date date){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM月dd日 HH时mm分");
+        return dateFormat.format(date);
     }
 }

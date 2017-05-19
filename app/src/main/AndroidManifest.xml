@@ -20,7 +20,7 @@
         </activity>
         <activity android:name=".Base.BaseActivity" />
         <activity android:name=".ViewImpls.DoubanBookDetailActivity" />
-        <activity android:name=".ViewImpls.MyBookDetailActivity"></activity>
+        <activity android:name=".ViewImpls.CurrentReadingDetailActivity"></activity>
     </application>
 
 </manifest>
