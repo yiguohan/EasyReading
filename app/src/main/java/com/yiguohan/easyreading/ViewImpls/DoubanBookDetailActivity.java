@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.yiguohan.easyreading.Base.BaseActivity;
 import com.yiguohan.easyreading.Beans.DoubanBooks.Book;
 import com.yiguohan.easyreading.Presenters.DoubanBooksPresenter;
 import com.yiguohan.easyreading.R;
@@ -20,7 +21,7 @@ import com.yiguohan.easyreading.Views.IGetBookView;
 
 import org.w3c.dom.Text;
 
-public class DoubanBookDetailActivity extends AppCompatActivity implements IGetBookView {
+public class DoubanBookDetailActivity extends BaseActivity implements IGetBookView {
 
     private DoubanBooksPresenter presenter;
 
