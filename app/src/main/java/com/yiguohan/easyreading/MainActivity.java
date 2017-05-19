@@ -9,8 +9,10 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
 
 import com.yiguohan.easyreading.Base.BaseActivity;
+import com.yiguohan.easyreading.Base.BaseFragment;
 import com.yiguohan.easyreading.ViewImpls.CurrentReadingFragment;
 import com.yiguohan.easyreading.ViewImpls.HomeFragment;
+import com.yiguohan.easyreading.ViewImpls.StaticsFragment;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -29,6 +31,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setCheckedItem(R.id.nav_home);
         fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().add(R.id.main_FrameLayout,new HomeFragment()).commit();
 
     }
 
@@ -36,21 +39,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_home:
-                mDrawerLayout.closeDrawers();
-                fragmentManager
-                        .beginTransaction()
-                        .replace(R.id.main_FrameLayout, new HomeFragment())
-                        .commit();
+                replaceFragment(new HomeFragment());
                 break;
             case R.id.nav_book:
-                mDrawerLayout.closeDrawers();
-                fragmentManager
-                        .beginTransaction()
-                        .replace(R.id.main_FrameLayout,new CurrentReadingFragment())
-                        .commit();
+                replaceFragment(new CurrentReadingFragment());
                 break;
             case R.id.nav_statics:
-                mDrawerLayout.closeDrawers();
+                replaceFragment(new StaticsFragment());
                 break;
             case R.id.nav_copyright:
                 mDrawerLayout.closeDrawers();
@@ -60,5 +55,17 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 break;
         }
         return true;
+    }
+
+    /**
+     * 替换Fragment的方法
+     * @param fragment
+     */
+    private void replaceFragment(BaseFragment fragment){
+        mDrawerLayout.closeDrawers();
+        fragmentManager
+                .beginTransaction()
+                .replace(R.id.main_FrameLayout,fragment)
+                .commit();
     }
 }

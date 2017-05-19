@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.yiguohan.easyreading.Adapters.DoubanBookAdapter;
+import com.yiguohan.easyreading.Base.BaseFragment;
 import com.yiguohan.easyreading.Beans.DoubanBooks.Book;
 import com.yiguohan.easyreading.Beans.DoubanBooks.BookList;
 import com.yiguohan.easyreading.Presenters.DoubanBooksPresenter;
@@ -22,7 +23,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DoubanBooksFragment extends Fragment  implements IGetBookListView{
+public class DoubanBooksFragment extends BaseFragment implements IGetBookListView{
 
     List<Book> bookList = new ArrayList<Book>();
     DoubanBookAdapter adapter;

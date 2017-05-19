@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.arlib.floatingsearchview.FloatingSearchView;
 import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion;
 import com.yiguohan.easyreading.Adapters.DoubanBookAdapter;
+import com.yiguohan.easyreading.Base.BaseFragment;
 import com.yiguohan.easyreading.Beans.DoubanBooks.Book;
 import com.yiguohan.easyreading.Beans.DoubanBooks.BookList;
 import com.yiguohan.easyreading.Presenters.DoubanBooksPresenter;
@@ -25,7 +26,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SearchBooksFragment extends Fragment implements IGetBookListView{
+public class SearchBooksFragment extends BaseFragment implements IGetBookListView{
 
     private FloatingSearchView mSearchView;
 
