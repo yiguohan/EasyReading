@@ -23,8 +23,8 @@ public class SignUpActivity extends BaseActivity {
     @BindView(R.id.edit_password_signUpCheck) EditText edt_passwordCheck;
     @OnClick(R.id.btn_RegisterAccount) void register(){
         Intent intent = new Intent();
-        intent.putExtra("Account",edt_account.getText());
-        intent.putExtra("Password",edt_password.getText());
+        intent.putExtra("Account",edt_account.getText().toString());
+        intent.putExtra("Password",edt_password.getText().toString());
         this.setResult(RESULT_OK,intent);
         finish();
     }
