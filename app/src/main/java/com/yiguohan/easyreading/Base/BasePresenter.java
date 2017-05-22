@@ -3,6 +3,7 @@ package com.yiguohan.easyreading.Base;
 import android.content.Context;
 
 import com.yiguohan.easyreading.APIs.ApiFactory;
+import com.yiguohan.easyreading.APIs.DBApi;
 import com.yiguohan.easyreading.APIs.DoubanApi;
 
 /**
@@ -12,12 +13,13 @@ import com.yiguohan.easyreading.APIs.DoubanApi;
 
 public class BasePresenter {
 
-    Context mcontext;
+    private Context mContext;
+    protected DoubanApi doubanService;
+    protected DBApi dataBaseService;
 
     public BasePresenter(Context context) {
-        this.mcontext = context;
+        this.mContext = context;
+        doubanService = ApiFactory.getDoubanService();
+        dataBaseService = ApiFactory.getDbService(mContext);
     }
-
-    protected DoubanApi doubanService = ApiFactory.getDoubanService();
-
 }

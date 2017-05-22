@@ -77,6 +77,11 @@ public class DBManager {
             }
 
             @Override
+            public Observable<Cursor> checkUserExistbyAccount(String account) {
+                return new ObservableJust<Cursor>(db.rawQuery("select * from User where account = ?",new String[]{account}));
+            }
+
+            @Override
             public Observable<Long> insertMyBook(MyBook book) {
                 ContentValues contentValues = new ContentValues();
                 contentValues.put("bookId",book.getBookId());

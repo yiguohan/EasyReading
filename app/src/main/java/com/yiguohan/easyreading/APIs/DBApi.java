@@ -49,6 +49,13 @@ public interface DBApi {
      */
     Observable<Cursor> getUserbyAccount(String account, String password);
 
+    /**
+     * 根据账户名称查询数据库中是否已经存在该账户
+     * @param account
+     * @return
+     */
+    Observable<Cursor> checkUserExistbyAccount(String account);
+
     /*----------------------------------------Mybook---------------------------------------*/
     /**
      * 添加正在阅读的书
