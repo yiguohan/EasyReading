@@ -3,11 +3,14 @@ package com.yiguohan.easyreading.Base;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.yiguohan.easyreading.Beans.User;
 import com.yiguohan.easyreading.R;
 
 public class BaseActivity extends AppCompatActivity {
 
-    public static String userId;
+    protected static String id;
+
+    protected static String account;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

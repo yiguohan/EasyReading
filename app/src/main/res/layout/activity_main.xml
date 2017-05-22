@@ -5,7 +5,7 @@
     android:id="@+id/main_DrawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.yiguohan.easyreading.MainActivity">
+    tools:context="com.yiguohan.easyreading.ViewImpls.MainActivity">
 
     <FrameLayout
         android:id="@+id/main_FrameLayout"
@@ -19,7 +19,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:headerLayout="@layout/nav_header"
         app:menu="@menu/nav_menu">
 
     </android.support.design.widget.NavigationView>

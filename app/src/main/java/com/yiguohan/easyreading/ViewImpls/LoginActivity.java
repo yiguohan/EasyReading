@@ -7,7 +7,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.yiguohan.easyreading.Base.BaseActivity;
-import com.yiguohan.easyreading.MainActivity;
+import com.yiguohan.easyreading.Beans.User;
 import com.yiguohan.easyreading.Presenters.DatabasePresenter;
 import com.yiguohan.easyreading.R;
 import com.yiguohan.easyreading.Utils.Util;
@@ -56,7 +56,6 @@ public class LoginActivity extends BaseActivity implements IGetDataView{
         switch (requestCode){
             case REQUEST_CODE:
                 if (resultCode == RESULT_OK){
-                    String s = data.getStringExtra("Account");
                     edt_account.setText(data.getStringExtra("Account"));
                     edt_password.setText(data.getStringExtra("Password"));
                 }
@@ -67,7 +66,8 @@ public class LoginActivity extends BaseActivity implements IGetDataView{
     public void getDataSuccess(Cursor cursor) {
         if (cursor.getCount() ==1){
             cursor.moveToFirst();
-            BaseActivity.userId = cursor.getString(cursor.getColumnIndex("id"));
+            BaseActivity.id  = cursor.getString(cursor.getColumnIndex("id"));
+            BaseActivity.account = cursor.getString(cursor.getColumnIndex("account"));
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
             finish();
         }else {
