@@ -7,6 +7,8 @@ import com.yiguohan.easyreading.R;
 
 public class BaseActivity extends AppCompatActivity {
 
+    public static String userId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

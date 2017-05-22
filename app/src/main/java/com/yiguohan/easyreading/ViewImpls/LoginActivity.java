@@ -1,26 +1,27 @@
 package com.yiguohan.easyreading.ViewImpls;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.Build;
+import android.database.Cursor;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yiguohan.easyreading.Base.BaseActivity;
+import com.yiguohan.easyreading.MainActivity;
+import com.yiguohan.easyreading.Presenters.DatabasePresenter;
 import com.yiguohan.easyreading.R;
 import com.yiguohan.easyreading.Utils.Util;
+import com.yiguohan.easyreading.Views.IGetDataView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends BaseActivity implements IGetDataView{
 
      private static final int REQUEST_CODE = 1;
+
+    private DatabasePresenter presenter;
 
     @BindView(R.id.edit_account_login)
     EditText edt_account;
@@ -36,7 +37,7 @@ public class LoginActivity extends BaseActivity {
 
     @OnClick(R.id.btn_Login)
     void submit() {
-        Toast.makeText(this, "Login", Toast.LENGTH_SHORT).show();
+        presenter.login(this,edt_account.getText().toString(),edt_password.getText().toString());
     }
 
 
@@ -44,11 +45,11 @@ public class LoginActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        presenter = new DatabasePresenter(this);
         ButterKnife.bind(this);
         Util.setStatuBarTransparent(this);
     }
 
-    //// TODO: 2017/5/19 返回的数据没有拿到
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -60,5 +61,22 @@ public class LoginActivity extends BaseActivity {
                     edt_password.setText(data.getStringExtra("Password"));
                 }
         }
+    }
+
+    @Override
+    public void getDataSuccess(Cursor cursor) {
+        if (cursor.getCount() ==1){
+            cursor.moveToFirst();
+            BaseActivity.userId = cursor.getString(cursor.getColumnIndex("id"));
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            finish();
+        }else {
+            getDataFail();
+        }
+    }
+
+    @Override
+    public void getDataFail() {
+        Toast.makeText(this,"账号或密码有误，请重新输入",Toast.LENGTH_LONG).show();
     }
 }

@@ -23,6 +23,12 @@ public class DatabasePresenter extends BasePresenter {
         super(context);
     }
 
+    /**
+     * 添加账户
+     *
+     * @param view
+     * @param user
+     */
     public void insertUser(final IInsertDataView view, User user) {
         dataBaseService.insertUser(user)
                 .subscribeOn(Schedulers.io())
@@ -35,6 +41,12 @@ public class DatabasePresenter extends BasePresenter {
                 });
     }
 
+    /**
+     * 账户查重
+     *
+     * @param view
+     * @param account
+     */
     public void chechAccount(final IInsertDataView view, String account) {
         dataBaseService.checkUserExistbyAccount(account)
                 .subscribeOn(Schedulers.io())
@@ -51,7 +63,26 @@ public class DatabasePresenter extends BasePresenter {
                 });
     }
 
+    /**
+     * 注册时账户密码是否一致
+     *
+     * @param password
+     * @param checkedPassword
+     * @return
+     */
     public boolean doubleCheckPassword(String password, String checkedPassword) {
         return password.equals(checkedPassword);
+    }
+
+    public void login(final IGetDataView view, String account, String password) {
+        dataBaseService.getUserbyAccount(account,password)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Cursor>() {
+                    @Override
+                    public void accept(Cursor cursor) throws Exception {
+                        view.getDataSuccess(cursor);
+                    }
+                });
     }
 }
