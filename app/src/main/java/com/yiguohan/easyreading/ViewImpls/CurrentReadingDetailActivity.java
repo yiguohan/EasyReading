@@ -41,18 +41,14 @@ public class CurrentReadingDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_current_reading_detail);
+        Util.setStatuBarTransparent(this);
         initData();
         suitLines = (SuitLines) findViewById(R.id.suitlines);
-
         recyclerView = (RecyclerView) findViewById(R.id.currentReadingDetail_RecyclerView);
-
         readingRecordAdapter = new ReadingRecordAdapter(readingRecords);
-
         GridLayoutManager layoutManager = new GridLayoutManager(this, 1);
-
         recyclerView.setAdapter(readingRecordAdapter);
         recyclerView.setLayoutManager(layoutManager);
-
         init(curCount);
     }
 
@@ -89,7 +85,7 @@ public class CurrentReadingDetailActivity extends BaseActivity {
     public void initData() {
         for (int i = 0; i < 140; i++) {
             ReadingRecord readingRecord = new ReadingRecord();
-            readingRecord.setTimeStamp(new Date(2017,05,1+i));
+            readingRecord.setTimeStamp(new Date(2017, 05, 1 + i));
             readingRecord.setCurrentPage(new SecureRandom().nextInt(200));
             readingRecords.add(readingRecord);
         }

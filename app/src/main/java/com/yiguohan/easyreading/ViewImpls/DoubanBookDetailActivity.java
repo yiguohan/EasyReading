@@ -43,6 +43,7 @@ public class DoubanBookDetailActivity extends BaseActivity implements IGetBookVi
         btn_register = (FloatingActionButton)findViewById(R.id.btn_register);
         collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbar_doubanBookDetail);
 
+        Util.setStatuBarTransparent(this);
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

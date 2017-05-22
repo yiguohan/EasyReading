@@ -1,5 +1,11 @@
 package com.yiguohan.easyreading.Utils;
 
+import android.content.Context;
+import android.graphics.Color;
+import android.os.Build;
+import android.view.View;
+
+import com.yiguohan.easyreading.Base.BaseActivity;
 import com.yiguohan.easyreading.Beans.DoubanBooks.Book;
 
 import java.text.SimpleDateFormat;
@@ -57,5 +63,18 @@ public class Util {
     public static String getFormatDate(Date date){
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM月dd日 HH时mm分");
         return dateFormat.format(date);
+    }
+
+    /**
+     * 设置状态栏为透明
+     * @param activity
+     */
+    public static void setStatuBarTransparent(BaseActivity activity){
+        if(Build.VERSION.SDK_INT >= 21){
+            View decorView = activity.getWindow().getDecorView();
+            int option = View.SYSTEM_UI_FLAG_FULLSCREEN|View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+            decorView.setSystemUiVisibility(option);
+            activity.getWindow().setStatusBarColor(Color.TRANSPARENT);
+        }
     }
 }

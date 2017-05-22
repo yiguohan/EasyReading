@@ -9,13 +9,17 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.yiguohan.easyreading.Base.BaseActivity;
+import com.yiguohan.easyreading.Presenters.DatabasePresenter;
 import com.yiguohan.easyreading.R;
+import com.yiguohan.easyreading.Utils.Util;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class SignUpActivity extends BaseActivity {
+
+    private DatabasePresenter presenter;
 
     @BindView(R.id.edit_account_signUp)
     EditText edt_account;
@@ -34,11 +38,6 @@ public class SignUpActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         ButterKnife.bind(this);
-        if(Build.VERSION.SDK_INT >= 21){
-            View decorView = getWindow().getDecorView();
-            int option = View.SYSTEM_UI_FLAG_FULLSCREEN|View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
-            decorView.setSystemUiVisibility(option);
-            getWindow().setStatusBarColor(Color.TRANSPARENT);
-        }
+        Util.setStatuBarTransparent(this);
     }
 }

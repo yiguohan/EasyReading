@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.yiguohan.easyreading.Base.BaseActivity;
 import com.yiguohan.easyreading.R;
+import com.yiguohan.easyreading.Utils.Util;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -44,13 +45,7 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        if(Build.VERSION.SDK_INT >= 21){
-            View decorView = getWindow().getDecorView();
-            int option = View.SYSTEM_UI_FLAG_FULLSCREEN|View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
-            decorView.setSystemUiVisibility(option);
-            getWindow().setStatusBarColor(Color.TRANSPARENT);
-        }
-
+        Util.setStatuBarTransparent(this);
     }
 
     //// TODO: 2017/5/19 返回的数据没有拿到
