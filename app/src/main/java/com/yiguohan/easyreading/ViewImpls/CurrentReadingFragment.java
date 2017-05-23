@@ -1,22 +1,19 @@
 package com.yiguohan.easyreading.ViewImpls;
 
-
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.yiguohan.easyreading.Adapters.BookAdapter;
+import com.yiguohan.easyreading.Adapters.MyBookAdapter;
 import com.yiguohan.easyreading.Base.BaseFragment;
-import com.yiguohan.easyreading.Beans.DoubanBooks.Book;
-import com.yiguohan.easyreading.Beans.DoubanBooks.BookList;
-import com.yiguohan.easyreading.Presenters.DoubanBooksPresenter;
+import com.yiguohan.easyreading.Beans.MyBook;
+import com.yiguohan.easyreading.Presenters.DatabasePresenter;
 import com.yiguohan.easyreading.R;
-import com.yiguohan.easyreading.Views.IGetBookListView;
+import com.yiguohan.easyreading.Views.IGetMyBookListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,15 +22,15 @@ import java.util.List;
 /**
  * 我的阅读
  */
-public class CurrentReadingFragment extends BaseFragment implements IGetBookListView{
+public class CurrentReadingFragment extends BaseFragment implements IGetMyBookListView {
 
     private static final String TAG = "CurrentReadingFragment";
 
-    List<Book> books = new ArrayList<Book>();
+    List<MyBook> myBooks = new ArrayList<MyBook>();
 
-    BookAdapter adapter;
+    MyBookAdapter adapter;
 
-    DoubanBooksPresenter presenter;
+    DatabasePresenter presenter;
 
     public CurrentReadingFragment() {
         // Required empty public constructor
@@ -45,30 +42,36 @@ public class CurrentReadingFragment extends BaseFragment implements IGetBookList
                              Bundle savedInstanceState) {
         initData();
         View view = inflater.inflate(R.layout.fragment_current_reading, container, false);
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.currentReading_recyclerview);
-        GridLayoutManager layoutManager = new GridLayoutManager(getContext(),1);
-        recyclerView.setLayoutManager(layoutManager);
-        adapter = new BookAdapter(books);
+        RecyclerView recyclerView = (RecyclerView)view.findViewById(R.id.currentReading_recyclerview);
+        adapter = new MyBookAdapter(myBooks);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
         return view;
     }
 
     @Override
-    public void getBookListSuccess(BookList list, boolean isMore) {
-        books.clear();
-        for (Book b : list.getBooks()) {
-            books.add(b);
+    public void getMyBookSucess(List<MyBook> books) {
+        this.myBooks.clear();
+        for (MyBook myBook : books) {
+            this.myBooks.add(myBook);
         }
-        initView();
-    }
-
-    private void initData(){
-        presenter = new DoubanBooksPresenter(getContext());
-        presenter.getBooksByKeyWord(CurrentReadingFragment.this,"Head First");
-    }
-
-    private void initView(){
         adapter.notifyDataSetChanged();
     }
+
+    @Override
+    public void getMyBookFail() {
+
+    }
+
+    private void initData() {
+        MyBook myBook = new MyBook();
+        myBook.setTitle("text");
+        myBooks.add(myBook);
+        presenter = new DatabasePresenter(getContext());
+        //// TODO: 2017/5/23 未能获取到BaseActivity.id;所以全局变量应该放在Application中或者查帖子看建议
+        presenter.getMyBookListByUserId(this, "2");
+    }
+
 
 }

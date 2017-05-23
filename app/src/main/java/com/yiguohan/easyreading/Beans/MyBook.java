@@ -25,6 +25,7 @@ public class MyBook {
     private int userId;
     private int bookId;
     private int process;
+    private String rating;
     private String title;
     private String imageUrl;
     private String currentPage;
@@ -61,6 +62,14 @@ public class MyBook {
         long current = Long.valueOf(currentPage);
         long total = Long.valueOf(totalPage);
         return current/total;
+    }
+
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
     }
 
     public String getTitle() {

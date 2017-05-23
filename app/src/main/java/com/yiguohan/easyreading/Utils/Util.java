@@ -94,6 +94,7 @@ public class Util {
         myBook.setCurrentPage("0");//添加时页码均为0
         myBook.setTotalPage(doubanBook.getPages());
         myBook.setImageUrl(doubanBook.getImage());
+        myBook.setRating(doubanBook.getRating().getAverage());
         return myBook;
     }
 }
