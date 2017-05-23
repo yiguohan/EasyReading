@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.yiguohan.easyreading.Base.BaseActivity;
 import com.yiguohan.easyreading.Beans.DoubanBooks.Book;
+import com.yiguohan.easyreading.Beans.MyBook;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -60,21 +61,39 @@ public class Util {
         return sb.toString();
     }
 
-    public static String getFormatDate(Date date){
+    public static String getFormatDate(Date date) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM月dd日 HH时mm分");
         return dateFormat.format(date);
     }
 
     /**
      * 设置状态栏为透明
+     *
      * @param activity
      */
-    public static void setStatuBarTransparent(BaseActivity activity){
-        if(Build.VERSION.SDK_INT >= 21){
+    public static void setStatuBarTransparent(BaseActivity activity) {
+        if (Build.VERSION.SDK_INT >= 21) {
             View decorView = activity.getWindow().getDecorView();
-            int option = View.SYSTEM_UI_FLAG_FULLSCREEN|View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+            int option = View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
             decorView.setSystemUiVisibility(option);
             activity.getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
+    }
+
+    /**
+     * 在添加阅读书籍时记录阅读书籍的类型转换
+     * @param userId 记录书籍的用户Id
+     * @param doubanBook 豆瓣的书籍信息
+     * @return
+     */
+    public static MyBook convertBookToMyBook(String userId, Book doubanBook) {
+        MyBook myBook = new MyBook();
+        myBook.setBookId(Integer.valueOf(doubanBook.getId()));
+        myBook.setUserId(Integer.valueOf(userId));
+        myBook.setTitle(doubanBook.getTitle());
+        myBook.setCurrentPage("0");//添加时页码均为0
+        myBook.setTotalPage(doubanBook.getPages());
+        myBook.setImageUrl(doubanBook.getImage());
+        return myBook;
     }
 }

@@ -92,6 +92,13 @@ public interface DBApi {
      */
     Observable<Cursor> getMyBooksByUserId(int userId);
 
+    /**
+     * 确认当前用户MyBook表中是否已经存在该书
+     * @param myBook
+     * @return
+     */
+    Observable<Cursor> checkMyBooksExists(MyBook myBook);
+
     /*----------------------------------------ReadingRecord---------------------------------------*/
 
     /**

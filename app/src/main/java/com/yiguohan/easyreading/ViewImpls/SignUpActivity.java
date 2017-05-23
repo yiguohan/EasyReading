@@ -1,12 +1,7 @@
 package com.yiguohan.easyreading.ViewImpls;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Color;
-import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -15,7 +10,6 @@ import com.yiguohan.easyreading.Beans.User;
 import com.yiguohan.easyreading.Presenters.DatabasePresenter;
 import com.yiguohan.easyreading.R;
 import com.yiguohan.easyreading.Utils.Util;
-import com.yiguohan.easyreading.Views.IGetDataView;
 import com.yiguohan.easyreading.Views.IInsertDataView;
 
 import butterknife.BindView;
@@ -43,7 +37,7 @@ public class SignUpActivity extends BaseActivity implements IInsertDataView {
             Toast.makeText(this, "两次输入的密码不一致，请重新确认", Toast.LENGTH_LONG).show();
             return;
         }
-        presenter.chechAccount(this, edt_account.getText().toString());
+        presenter.checkAccount(this, edt_account.getText().toString());
     }
 
     @Override

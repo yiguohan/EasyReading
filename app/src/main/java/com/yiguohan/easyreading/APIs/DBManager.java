@@ -114,6 +114,11 @@ public class DBManager {
             }
 
             @Override
+            public Observable<Cursor> checkMyBooksExists(MyBook myBook) {
+                return new ObservableJust<Cursor>(db.rawQuery("select * from MyBook where userId = ? and bookId = ?", new String[]{String.valueOf(myBook.getUserId()),String.valueOf(myBook.getBookId())}));
+            }
+
+            @Override
             public Observable<Cursor> getMyBookById(int id) {
                 return new ObservableJust<Cursor>(db.rawQuery("select * from MyBook where id = ?",new String[]{String.valueOf(id)}));
             }
