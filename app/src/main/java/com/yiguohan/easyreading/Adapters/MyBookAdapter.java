@@ -43,7 +43,7 @@ public class MyBookAdapter extends RecyclerView.Adapter<MyBookAdapter.ViewHolder
         MyBook myBook = myBooks.get(position);
         Glide.with(mContext).load(myBook.getImageUrl()).fitCenter().into(holder.img_Cover);
         holder.txt_Title.setText(myBook.getTitle());
-        holder.txt_Rating.setText("豆瓣评分：" + myBook.getRating());
+//        holder.txt_Rating.setText("豆瓣评分：" + myBook.getRating());
         holder.txt_Pages.setText(myBook.getCurrentPage() +"/"+myBook.getTotalPage());
         holder.circleImageView_progress.setProgress((int)myBook.getProcess());
     }
@@ -58,7 +58,6 @@ public class MyBookAdapter extends RecyclerView.Adapter<MyBookAdapter.ViewHolder
         CardView cardView;
         ImageView img_Cover;
         TextView txt_Title;
-        TextView txt_Rating;
         TextView txt_Pages;
         CircleProgressView circleImageView_progress;
 
@@ -67,7 +66,6 @@ public class MyBookAdapter extends RecyclerView.Adapter<MyBookAdapter.ViewHolder
             cardView = (CardView)itemView;
             img_Cover = (ImageView) itemView.findViewById(R.id.img_book_item);
             txt_Title = (TextView) itemView.findViewById(R.id.txt_book_item);
-            txt_Rating = (TextView) itemView.findViewById(R.id.txt_rating_book_item);
             txt_Pages = (TextView) itemView.findViewById(R.id.txt_pages_book_item);
             circleImageView_progress = (CircleProgressView) itemView.findViewById(R.id.progressView_book_item);
         }

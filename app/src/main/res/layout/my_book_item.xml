@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:layout_marginLeft="12dp"
     android:layout_marginRight="12dp"
     android:layout_marginTop="12dp"
+    android:orientation="vertical"
     app:cardCornerRadius="12dp">
 
     <LinearLayout
@@ -44,22 +44,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:maxWidth="150dp"
-                android:textSize="10sp" />
-
-            <TextView
-                android:id="@+id/txt_rating_book_item"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:maxWidth="150dp"
-                android:text="评分：9.6"
-                android:textSize="10sp" />
-
+                android:textSize="15sp" />
         </LinearLayout>
 
         <LinearLayout
