@@ -1,8 +1,8 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.yiguohan.easyreading.ViewImpls.CurrentReadingFragment">
 
     <RelativeLayout
@@ -14,21 +14,8 @@
             android:id="@+id/currentReading_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="55dp"
-            android:clipToPadding="false"
-            android:background="#D7D7D7"/>
-
-        <com.arlib.floatingsearchview.FloatingSearchView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:floatingSearch_dismissOnOutsideTouch="true"
-            app:floatingSearch_suggestionsListAnimDuration="250"
-            app:floatingSearch_dimBackground="false"
-            app:floatingSearch_close_search_on_keyboard_dismiss="false"
-            app:floatingSearch_leftActionMode="showHamburger">
-
-
-        </com.arlib.floatingsearchview.FloatingSearchView>
+            android:background="#D7D7D7"
+            android:clipToPadding="false" />
 
     </RelativeLayout>
 
