@@ -8,9 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.white.progressview.CircleProgressView;
+import com.yiguohan.easyreading.Base.EasyReadingApplication;
 import com.yiguohan.easyreading.Beans.MyBook;
 import com.yiguohan.easyreading.R;
 
@@ -21,7 +23,7 @@ import java.util.List;
  * Email:yiguohan@gmail.com
  */
 
-public class MyBookAdapter extends RecyclerView.Adapter<MyBookAdapter.ViewHolder> {
+public class MyBookAdapter extends RecyclerView.Adapter<MyBookAdapter.ViewHolder> implements View.OnClickListener {
 
     List<MyBook> myBooks;
 
@@ -34,8 +36,13 @@ public class MyBookAdapter extends RecyclerView.Adapter<MyBookAdapter.ViewHolder
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         mContext = parent.getContext();
-        View view = LayoutInflater.from(mContext).inflate(R.layout.my_book_item, parent,false);
-        return new ViewHolder(view);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.my_book_item, parent, false);
+        ViewHolder holder = new ViewHolder(view);
+        holder.img_Cover.setOnClickListener(this);
+        holder.circleImageView_progress.setOnClickListener(this);
+        holder.img_More.setOnClickListener(this);
+        holder.cardView.setOnClickListener(this);
+        return holder;
     }
 
     @Override
@@ -43,9 +50,8 @@ public class MyBookAdapter extends RecyclerView.Adapter<MyBookAdapter.ViewHolder
         MyBook myBook = myBooks.get(position);
         Glide.with(mContext).load(myBook.getImageUrl()).fitCenter().into(holder.img_Cover);
         holder.txt_Title.setText(myBook.getTitle());
-//        holder.txt_Rating.setText("豆瓣评分：" + myBook.getRating());
-        holder.txt_Pages.setText(myBook.getCurrentPage() +"/"+myBook.getTotalPage());
-        holder.circleImageView_progress.setProgress((int)myBook.getProcess());
+        holder.txt_Pages.setText(myBook.getCurrentPage() + "/" + myBook.getTotalPage());
+        holder.circleImageView_progress.setProgress((int) myBook.getProcess());
     }
 
     @Override
@@ -57,17 +63,38 @@ public class MyBookAdapter extends RecyclerView.Adapter<MyBookAdapter.ViewHolder
 
         CardView cardView;
         ImageView img_Cover;
+        ImageView img_More;
         TextView txt_Title;
         TextView txt_Pages;
         CircleProgressView circleImageView_progress;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            cardView = (CardView)itemView;
+            cardView = (CardView) itemView.findViewById(R.id.cardView_book_item);
             img_Cover = (ImageView) itemView.findViewById(R.id.img_book_item);
+            img_More = (ImageView) itemView.findViewById(R.id.img_more_book_item);
             txt_Title = (TextView) itemView.findViewById(R.id.txt_book_item);
             txt_Pages = (TextView) itemView.findViewById(R.id.txt_pages_book_item);
             circleImageView_progress = (CircleProgressView) itemView.findViewById(R.id.progressView_book_item);
         }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.cardView_book_item:
+                Toast.makeText(EasyReadingApplication.getContext(), "CardView", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.img_book_item:
+                Toast.makeText(EasyReadingApplication.getContext(), "书籍信息", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.img_more_book_item:
+                Toast.makeText(EasyReadingApplication.getContext(), "More", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.progressView_book_item:
+                Toast.makeText(EasyReadingApplication.getContext(), "Progress", Toast.LENGTH_SHORT).show();
+                break;
+        }
+
     }
 }
