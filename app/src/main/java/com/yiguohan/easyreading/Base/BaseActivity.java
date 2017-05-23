@@ -8,10 +8,6 @@ import com.yiguohan.easyreading.R;
 
 public class BaseActivity extends AppCompatActivity {
 
-    protected static String id;
-
-    protected static String account;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

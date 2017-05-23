@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.yiguohan.easyreading.Base.BaseActivity;
+import com.yiguohan.easyreading.Base.EasyReadingApplication;
 import com.yiguohan.easyreading.Beans.DoubanBooks.Book;
 import com.yiguohan.easyreading.Beans.MyBook;
 import com.yiguohan.easyreading.Presenters.DatabasePresenter;
@@ -76,7 +77,7 @@ public class DoubanBookDetailActivity extends BaseActivity implements View.OnCli
                         .setPositiveButton("是的", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                myBook = Util.convertBookToMyBook(BaseActivity.id, doubanBook);
+                                myBook = Util.convertBookToMyBook(EasyReadingApplication.getCurrentUserId(), doubanBook);
                                 databasePresenter.checkMyBook(DoubanBookDetailActivity.this, myBook);
                             }
                         })

@@ -26,7 +26,7 @@ import org.w3c.dom.Text;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener,IGetDataView{
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, IGetDataView {
 
     private FragmentManager fragmentManager;
 
@@ -46,15 +46,16 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         ButterKnife.bind(this);
 
         //获取HeaderView 更改用户名（如果直接FindViewById会Crash）
-        View headerView =navigationView.inflateHeaderView(R.layout.nav_header);
-        textView = (TextView)headerView.findViewById(R.id.txt_nav_header_username);
-        textView.setText(BaseActivity.account);
+        View headerView = navigationView.inflateHeaderView(R.layout.nav_header);
+        textView = (TextView) headerView.findViewById(R.id.txt_nav_header_username);
+        ///// TODO: 2017/5/23 根据Id去SharedPreference中取账户名
+        textView.setText("欢迎你，" + "账户" + "!");
 
         //设置初始菜单选择项和初始Fragment
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setCheckedItem(R.id.nav_home);
         fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().add(R.id.main_FrameLayout,new HomeFragment()).commit();
+        fragmentManager.beginTransaction().add(R.id.main_FrameLayout, new HomeFragment()).commit();
     }
 
     @Override
@@ -81,13 +82,14 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     /**
      * 替换Fragment的方法
+     *
      * @param fragment
      */
-    private void replaceFragment(BaseFragment fragment){
+    private void replaceFragment(BaseFragment fragment) {
         mDrawerLayout.closeDrawers();
         fragmentManager
                 .beginTransaction()
-                .replace(R.id.main_FrameLayout,fragment)
+                .replace(R.id.main_FrameLayout, fragment)
                 .commit();
     }
 

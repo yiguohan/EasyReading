@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.yiguohan.easyreading.Adapters.MyBookAdapter;
 import com.yiguohan.easyreading.Base.BaseFragment;
+import com.yiguohan.easyreading.Base.EasyReadingApplication;
 import com.yiguohan.easyreading.Beans.MyBook;
 import com.yiguohan.easyreading.Presenters.DatabasePresenter;
 import com.yiguohan.easyreading.R;
@@ -69,8 +70,7 @@ public class CurrentReadingFragment extends BaseFragment implements IGetMyBookLi
         myBook.setTitle("text");
         myBooks.add(myBook);
         presenter = new DatabasePresenter(getContext());
-        //// TODO: 2017/5/23 未能获取到BaseActivity.id;所以全局变量应该放在Application中或者查帖子看建议
-        presenter.getMyBookListByUserId(this, "2");
+        presenter.getMyBookListByUserId(this, EasyReadingApplication.getCurrentUserId());
     }
 
 
