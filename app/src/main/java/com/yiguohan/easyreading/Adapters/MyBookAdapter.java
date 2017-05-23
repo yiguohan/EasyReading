@@ -1,6 +1,7 @@
 package com.yiguohan.easyreading.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import com.white.progressview.CircleProgressView;
 import com.yiguohan.easyreading.Base.EasyReadingApplication;
 import com.yiguohan.easyreading.Beans.MyBook;
 import com.yiguohan.easyreading.R;
+import com.yiguohan.easyreading.ViewImpls.DoubanBookDetailActivity;
 
 import java.util.List;
 
@@ -23,7 +25,7 @@ import java.util.List;
  * Email:yiguohan@gmail.com
  */
 
-public class MyBookAdapter extends RecyclerView.Adapter<MyBookAdapter.ViewHolder> implements View.OnClickListener {
+public class MyBookAdapter extends RecyclerView.Adapter<MyBookAdapter.ViewHolder>  {
 
     List<MyBook> myBooks;
 
@@ -37,11 +39,34 @@ public class MyBookAdapter extends RecyclerView.Adapter<MyBookAdapter.ViewHolder
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         mContext = parent.getContext();
         View view = LayoutInflater.from(mContext).inflate(R.layout.my_book_item, parent, false);
-        ViewHolder holder = new ViewHolder(view);
-        holder.img_Cover.setOnClickListener(this);
-        holder.circleImageView_progress.setOnClickListener(this);
-        holder.img_More.setOnClickListener(this);
-        holder.cardView.setOnClickListener(this);
+        final ViewHolder holder = new ViewHolder(view);
+        holder.img_Cover.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyBook myBook = myBooks.get(holder.getAdapterPosition());
+                Intent intent = new Intent(EasyReadingApplication.getContext(), DoubanBookDetailActivity.class);
+                intent.putExtra("BookId", String.valueOf(myBook.getBookId()));
+                mContext.startActivity(intent);
+            }
+        });
+        holder.circleImageView_progress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mContext,"打开数据统计页面",Toast.LENGTH_SHORT).show();
+            }
+        });
+        holder.img_More.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mContext,"打开记录数据页面",Toast.LENGTH_SHORT).show();
+            }
+        });
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mContext,"打开记录数据页面",Toast.LENGTH_SHORT).show();
+            }
+        });
         return holder;
     }
 
@@ -79,22 +104,4 @@ public class MyBookAdapter extends RecyclerView.Adapter<MyBookAdapter.ViewHolder
         }
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.cardView_book_item:
-                Toast.makeText(EasyReadingApplication.getContext(), "CardView", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.img_book_item:
-                Toast.makeText(EasyReadingApplication.getContext(), "书籍信息", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.img_more_book_item:
-                Toast.makeText(EasyReadingApplication.getContext(), "More", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.progressView_book_item:
-                Toast.makeText(EasyReadingApplication.getContext(), "Progress", Toast.LENGTH_SHORT).show();
-                break;
-        }
-
-    }
 }
