@@ -12,36 +12,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ViewImpls.MainActivity">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-        </activity>
+        <activity android:name=".ViewImpls.MainActivity" />
         <activity android:name=".Base.BaseActivity" />
         <activity android:name=".ViewImpls.DoubanBookDetailActivity" />
         <activity android:name=".ViewImpls.CurrentReadingDetailActivity" />
         <activity
             android:name=".ViewImpls.LoginActivity"
             android:windowSoftInputMode="stateHidden">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".ViewImpls.SignUpActivity"
             android:launchMode="standard"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".ViewImpls.ReadingActivity"><intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter></activity>
+        <activity android:name=".ViewImpls.ReadingActivity" />
     </application>
 
 </manifest>
