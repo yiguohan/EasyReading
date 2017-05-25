@@ -82,7 +82,8 @@ public class Util {
 
     /**
      * 在添加阅读书籍时记录阅读书籍的类型转换
-     * @param userId 记录书籍的用户Id
+     *
+     * @param userId     记录书籍的用户Id
      * @param doubanBook 豆瓣的书籍信息
      * @return
      */
@@ -96,5 +97,13 @@ public class Util {
         myBook.setImageUrl(doubanBook.getImage());
         myBook.setRating(doubanBook.getRating().getAverage());
         return myBook;
+    }
+
+    public static String addTitleMark(String bookTitle) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("《")
+                .append(bookTitle)
+                .append("》");
+        return sb.toString();
     }
 }

@@ -2,12 +2,14 @@ package com.yiguohan.easyreading.Presenters;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.text.TextUtils;
 
 import com.yiguohan.easyreading.Base.BasePresenter;
 import com.yiguohan.easyreading.Beans.MyBook;
 import com.yiguohan.easyreading.Beans.User;
 import com.yiguohan.easyreading.Views.IGetDataView;
 import com.yiguohan.easyreading.Views.IGetMyBookListView;
+import com.yiguohan.easyreading.Views.IGetMyBookView;
 import com.yiguohan.easyreading.Views.IInsertDataView;
 
 import java.util.ArrayList;
@@ -146,6 +148,27 @@ public class DatabasePresenter extends BasePresenter {
                             view.getMyBookSucess(myBooks);
                         }  else {
                             view.getMyBookFail();
+                        }
+                    }
+                });
+    }
+
+    public void getMyBookByMyBookId(final IGetMyBookView view, String myBookId){
+        if (TextUtils.isEmpty(myBookId)){
+            view.getMybookFail();
+            return;
+        }
+        dataBaseService.getMyBookById(Integer.valueOf(myBookId))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Cursor>() {
+                    @Override
+                    public void accept(Cursor cursor) throws Exception {
+                        if (cursor.getCount() == 1){
+                            cursor.moveToFirst();
+                            view.getMyBookSuccess(parseData(cursor));
+                        }else {
+                            view.getMybookFail();
                         }
                     }
                 });

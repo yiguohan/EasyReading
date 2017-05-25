@@ -2,6 +2,7 @@ package com.yiguohan.easyreading.ViewImpls;
 
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -14,7 +15,11 @@ import android.widget.Toast;
 import com.white.progressview.CircleProgressView;
 import com.yiguohan.easyreading.Base.BaseActivity;
 import com.yiguohan.easyreading.Base.EasyReadingApplication;
+import com.yiguohan.easyreading.Beans.MyBook;
+import com.yiguohan.easyreading.Presenters.DatabasePresenter;
 import com.yiguohan.easyreading.R;
+import com.yiguohan.easyreading.Utils.Util;
+import com.yiguohan.easyreading.Views.IGetMyBookView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,15 +28,20 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ReadingActivity extends BaseActivity {
+public class ReadingActivity extends BaseActivity implements IGetMyBookView {
 
     private static final int TIME = 1;
 
     private Handler handler;
 
+    private DatabasePresenter databasePresenter;
+
     private EditText edt_CurrentPage;
 
     private TextView txt_TotalPage;
+
+    @BindView(R.id.txt_bookTitle_reading_activity)
+    TextView txt_BookTitle;
 
     @BindView(R.id.txt_time_reading_activity)
     TextView txt_Time;
@@ -70,6 +80,11 @@ public class ReadingActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reading);
         ButterKnife.bind(this);
+        databasePresenter = new DatabasePresenter(this);
+        Intent intent = getIntent();
+        intent.getStringExtra("MyBookId");
+        databasePresenter.getMyBookByMyBookId(this, intent.getStringExtra("MyBookId"));
+
         handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
@@ -80,6 +95,21 @@ public class ReadingActivity extends BaseActivity {
             }
         };
         getCurrentTime();
+    }
+
+    @Override
+    public void getMyBookSuccess(MyBook myBook) {
+        if (myBook == null){
+            getMybookFail();
+            return;
+        }
+        txt_BookTitle.setText(Util.addTitleMark(myBook.getTitle()));
+        circleProgressView.setProgress((int)myBook.getProcess());
+    }
+
+    @Override
+    public void getMybookFail() {
+        Toast.makeText(this,"出现未知错误",Toast.LENGTH_SHORT).show();
     }
 
     /**
