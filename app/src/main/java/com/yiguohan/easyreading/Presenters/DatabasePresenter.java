@@ -6,11 +6,13 @@ import android.text.TextUtils;
 
 import com.yiguohan.easyreading.Base.BasePresenter;
 import com.yiguohan.easyreading.Beans.MyBook;
+import com.yiguohan.easyreading.Beans.ReadingRecord;
 import com.yiguohan.easyreading.Beans.User;
 import com.yiguohan.easyreading.Views.IGetDataView;
 import com.yiguohan.easyreading.Views.IGetMyBookListView;
 import com.yiguohan.easyreading.Views.IGetMyBookView;
 import com.yiguohan.easyreading.Views.IInsertDataView;
+import com.yiguohan.easyreading.Views.IUpdateDataView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -174,6 +176,23 @@ public class DatabasePresenter extends BasePresenter {
                 });
     }
 
+    /**
+     * 更新MyBook数据
+     * @param view
+     * @param myBook
+     */
+    public void updateMyBook(final IUpdateDataView view, MyBook myBook){
+        dataBaseService.updateMyBook(myBook)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer integer) throws Exception {
+                        view.updateDataSuceess(integer);
+                    }
+                });
+    }
+
 
     /**
      * 解析返回的数据
@@ -191,4 +210,25 @@ public class DatabasePresenter extends BasePresenter {
         myBook.setTotalPage(cursor.getString(cursor.getColumnIndex("totalPage")));
         return myBook;
     }
+
+    /*---------------------------------------ReadingRecord--------------------------------------*/
+
+    /**
+     * 添加阅读记录
+     * @param view
+     * @param record
+     */
+    public void insertReadingRecord(final IInsertDataView view, ReadingRecord record){
+        dataBaseService.insertReadingRecord(record)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Long>() {
+                    @Override
+                    public void accept(Long aLong) throws Exception {
+                        view.insertDataSuccess(aLong);
+                    }
+                });
+    }
+
+
 }

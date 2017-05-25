@@ -55,13 +55,14 @@ public class MyBook {
         this.bookId = bookId;
     }
 
-    public long getProcess() {
+    public int getProcess() {
         if (TextUtils.isEmpty(currentPage)||(TextUtils.isEmpty(totalPage))){
             return 0;
         }
         long current = Long.valueOf(currentPage);
         long total = Long.valueOf(totalPage);
-        return current/total;
+        float process = (float)current/(float)total;
+        return (int)(process*100);
     }
 
     public String getRating() {
