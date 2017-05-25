@@ -11,12 +11,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.BitmapRequestBuilder;
 import com.bumptech.glide.Glide;
 import com.white.progressview.CircleProgressView;
+import com.yiguohan.easyreading.Base.BaseActivity;
 import com.yiguohan.easyreading.Base.EasyReadingApplication;
 import com.yiguohan.easyreading.Beans.MyBook;
 import com.yiguohan.easyreading.R;
+import com.yiguohan.easyreading.ViewImpls.CurrentReadingDetailActivity;
 import com.yiguohan.easyreading.ViewImpls.DoubanBookDetailActivity;
+import com.yiguohan.easyreading.ViewImpls.ReadingActivity;
 
 import java.util.List;
 
@@ -25,11 +29,15 @@ import java.util.List;
  * Email:yiguohan@gmail.com
  */
 
-public class MyBookAdapter extends RecyclerView.Adapter<MyBookAdapter.ViewHolder>  {
+public class MyBookAdapter extends RecyclerView.Adapter<MyBookAdapter.ViewHolder> {
 
     List<MyBook> myBooks;
 
     Context mContext;
+
+    final int START_READING = 1;
+    final int START_CURRENT_READING_DETAIL = 2;
+    final int START_DOUBAN_DETAIL = 3;
 
     public MyBookAdapter(List<MyBook> myBooks) {
         this.myBooks = myBooks;
@@ -40,34 +48,7 @@ public class MyBookAdapter extends RecyclerView.Adapter<MyBookAdapter.ViewHolder
         mContext = parent.getContext();
         View view = LayoutInflater.from(mContext).inflate(R.layout.my_book_item, parent, false);
         final ViewHolder holder = new ViewHolder(view);
-        holder.img_Cover.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MyBook myBook = myBooks.get(holder.getAdapterPosition());
-                Intent intent = new Intent(EasyReadingApplication.getContext(), DoubanBookDetailActivity.class);
-                intent.putExtra("BookId", String.valueOf(myBook.getBookId()));
-                mContext.startActivity(intent);
-            }
-        });
-        holder.circleImageView_progress.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(mContext,"打开数据统计页面",Toast.LENGTH_SHORT).show();
-            }
-        });
-        holder.img_More.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(mContext,"打开记录数据页面",Toast.LENGTH_SHORT).show();
-            }
-        });
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(mContext,"打开记录数据页面",Toast.LENGTH_SHORT).show();
-            }
-        });
-        return holder;
+        return initViewListeners(holder);
     }
 
     @Override
@@ -101,6 +82,72 @@ public class MyBookAdapter extends RecyclerView.Adapter<MyBookAdapter.ViewHolder
             txt_Title = (TextView) itemView.findViewById(R.id.txt_book_item);
             txt_Pages = (TextView) itemView.findViewById(R.id.txt_pages_book_item);
             circleImageView_progress = (CircleProgressView) itemView.findViewById(R.id.progressView_book_item);
+        }
+    }
+
+    /**
+     * 注册控件的监听
+     * @param holder
+     * @return
+     */
+    private ViewHolder initViewListeners(final ViewHolder holder) {
+        holder.img_Cover.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyBook myBook = myBooks.get(holder.getAdapterPosition());
+                startActivity(myBook, START_DOUBAN_DETAIL);
+            }
+        });
+
+        holder.circleImageView_progress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyBook myBook = myBooks.get(holder.getAdapterPosition());
+                startActivity(myBook, START_CURRENT_READING_DETAIL);
+            }
+        });
+
+        holder.img_More.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyBook myBook = myBooks.get(holder.getAdapterPosition());
+                startActivity(myBook, START_READING);
+            }
+        });
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyBook myBook = myBooks.get(holder.getAdapterPosition());
+                startActivity(myBook, START_READING);
+            }
+        });
+        return holder;
+    }
+
+    /**
+     * 根据当前信息打开指定的Activity
+     *
+     * @param myBook
+     * @param selectActivity
+     */
+    private void startActivity(MyBook myBook, int selectActivity) {
+        Intent intent;
+        switch (selectActivity) {
+            case START_READING:
+                intent = new Intent(mContext, ReadingActivity.class);
+                intent.putExtra("MyBookId", String.valueOf(myBook.getId()));
+                mContext.startActivity(intent);
+                break;
+            case START_CURRENT_READING_DETAIL:
+                intent = new Intent(mContext, CurrentReadingDetailActivity.class);
+                intent.putExtra("MyBookId", String.valueOf(myBook.getId()));
+                mContext.startActivity(intent);
+                break;
+            case START_DOUBAN_DETAIL:
+                intent = new Intent(EasyReadingApplication.getContext(), DoubanBookDetailActivity.class);
+                intent.putExtra("BookId", String.valueOf(myBook.getBookId()));
+                mContext.startActivity(intent);
+                break;
         }
     }
 
