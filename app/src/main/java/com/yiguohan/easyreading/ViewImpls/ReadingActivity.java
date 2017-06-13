@@ -104,7 +104,7 @@ public class ReadingActivity extends BaseActivity implements IGetMyBookView,IIns
         };
         getCurrentTime();
     }
-
+    /*--------------------------------------IGetMyBookView回调-------------------------------------*/
     @Override
     public void getMyBookSuccess(MyBook myBook) {
         if (myBook == null) {
@@ -121,6 +121,12 @@ public class ReadingActivity extends BaseActivity implements IGetMyBookView,IIns
         Toast.makeText(this, "出现未知错误", Toast.LENGTH_SHORT).show();
     }
 
+    /*--------------------------------------IInsertDataView回调------------------------------------*/
+
+    /**
+     * 如过向ReadingRecord插入数据成功，则更新MyBook数据中的currentPage字段
+     * @param num
+     */
     @Override
     public void insertDataSuccess(long num) {
         databasePresenter.updateMyBook(this,currentMyBook);
@@ -130,12 +136,16 @@ public class ReadingActivity extends BaseActivity implements IGetMyBookView,IIns
     public void insertDataFail() {
 
     }
-
     @Override
     public void checkData(boolean isSuccess) {
 
     }
+    /*--------------------------------------IUpdataDataView回调------------------------------------*/
 
+    /**
+     * 更新MyBook中currentReading字段成功后重新获取MyBook信息，刷新显示
+     * @param num
+     */
     @Override
     public void updateDataSuceess(int num) {
         databasePresenter.getMyBookByMyBookId(this,String.valueOf(currentMyBook.getId()));

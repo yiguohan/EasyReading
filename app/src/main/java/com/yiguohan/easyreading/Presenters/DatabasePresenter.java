@@ -230,5 +230,9 @@ public class DatabasePresenter extends BasePresenter {
                 });
     }
 
+//    public void checkReadingRecord(final IInsertDataView view,ReadingRecord record,MyBook currentBook){
+//        if (record.getCurrentPage())
+//    }
+
 
 }
