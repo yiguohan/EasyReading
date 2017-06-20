@@ -14,8 +14,10 @@ import android.widget.Toast;
 
 import com.yiguohan.easyreading.Base.BaseActivity;
 import com.yiguohan.easyreading.Base.BaseFragment;
+import com.yiguohan.easyreading.Base.EasyReadingApplication;
 import com.yiguohan.easyreading.Presenters.DatabasePresenter;
 import com.yiguohan.easyreading.R;
+import com.yiguohan.easyreading.Utils.Util;
 import com.yiguohan.easyreading.ViewImpls.CurrentReadingFragment;
 import com.yiguohan.easyreading.ViewImpls.HomeFragment;
 import com.yiguohan.easyreading.ViewImpls.StaticsFragment;
@@ -31,6 +33,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private FragmentManager fragmentManager;
 
     private TextView textView;
+
+    private DatabasePresenter databasePresenter;
 
     @BindView(R.id.main_DrawerLayout)
     DrawerLayout mDrawerLayout;
@@ -49,7 +53,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         View headerView = navigationView.inflateHeaderView(R.layout.nav_header);
         textView = (TextView) headerView.findViewById(R.id.txt_nav_header_username);
         ///// TODO: 2017/5/23 根据Id去SharedPreference中取账户名
-        textView.setText("欢迎你，" + "账户" + "!");
+        databasePresenter = new DatabasePresenter(this);
+        databasePresenter.getUserById(this, Integer.valueOf(EasyReadingApplication.getCurrentUserId()));
+        Util.setHelloSlogan(textView);
 
         //设置初始菜单选择项和初始Fragment
         navigationView.setNavigationItemSelectedListener(this);
@@ -95,7 +101,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     public void getDataSuccess(Cursor cursor) {
-
+        if (cursor.getCount() == 1){
+            cursor.moveToFirst();
+            Util.setHelloSlogan(textView,cursor.getString(cursor.getColumnIndex("account")));
+        }
     }
 
     @Override

@@ -98,6 +98,18 @@ public class DatabasePresenter extends BasePresenter {
                 });
     }
 
+    public void getUserById(final IGetDataView view, int id) {
+        dataBaseService.getUserById(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Cursor>() {
+                    @Override
+                    public void accept(Cursor cursor) throws Exception {
+                        view.getDataSuccess(cursor);
+                    }
+                });
+    }
+
      /*---------------------------------------MyBooks--------------------------------------*/
 
     public void insertMyBook(final IInsertDataView view, MyBook book) {
@@ -146,17 +158,17 @@ public class DatabasePresenter extends BasePresenter {
                             cursor.moveToFirst();
                             do {
                                 myBooks.add(parseData(cursor));
-                            }while (cursor.moveToNext());
+                            } while (cursor.moveToNext());
                             view.getMyBookSucess(myBooks);
-                        }  else {
+                        } else {
                             view.getMyBookFail();
                         }
                     }
                 });
     }
 
-    public void getMyBookByMyBookId(final IGetMyBookView view, String myBookId){
-        if (TextUtils.isEmpty(myBookId)){
+    public void getMyBookByMyBookId(final IGetMyBookView view, String myBookId) {
+        if (TextUtils.isEmpty(myBookId)) {
             view.getMybookFail();
             return;
         }
@@ -166,10 +178,10 @@ public class DatabasePresenter extends BasePresenter {
                 .subscribe(new Consumer<Cursor>() {
                     @Override
                     public void accept(Cursor cursor) throws Exception {
-                        if (cursor.getCount() == 1){
+                        if (cursor.getCount() == 1) {
                             cursor.moveToFirst();
                             view.getMyBookSuccess(parseData(cursor));
-                        }else {
+                        } else {
                             view.getMybookFail();
                         }
                     }
@@ -178,10 +190,11 @@ public class DatabasePresenter extends BasePresenter {
 
     /**
      * 更新MyBook数据
+     *
      * @param view
      * @param myBook
      */
-    public void updateMyBook(final IUpdateDataView view, MyBook myBook){
+    public void updateMyBook(final IUpdateDataView view, MyBook myBook) {
         dataBaseService.updateMyBook(myBook)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -196,6 +209,7 @@ public class DatabasePresenter extends BasePresenter {
 
     /**
      * 解析返回的数据
+     *
      * @param cursor
      * @return
      */
@@ -215,10 +229,11 @@ public class DatabasePresenter extends BasePresenter {
 
     /**
      * 添加阅读记录
+     *
      * @param view
      * @param record
      */
-    public void insertReadingRecord(final IInsertDataView view, ReadingRecord record){
+    public void insertReadingRecord(final IInsertDataView view, ReadingRecord record) {
         dataBaseService.insertReadingRecord(record)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

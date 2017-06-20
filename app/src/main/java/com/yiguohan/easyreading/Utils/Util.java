@@ -3,7 +3,9 @@ package com.yiguohan.easyreading.Utils;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.TextView;
 
 import com.yiguohan.easyreading.Base.BaseActivity;
 import com.yiguohan.easyreading.Beans.DoubanBooks.Book;
@@ -105,5 +107,17 @@ public class Util {
                 .append(bookTitle)
                 .append("》");
         return sb.toString();
+    }
+
+    public static void setHelloSlogan(TextView textView, String slogan) {
+        if (TextUtils.isEmpty(slogan)) {
+            textView.setText("欢迎你！");
+            return;
+        }
+        textView.setText("欢迎你，" + slogan + "！");
+    }
+
+    public static void setHelloSlogan(TextView textView) {
+        setHelloSlogan(textView, "");
     }
 }

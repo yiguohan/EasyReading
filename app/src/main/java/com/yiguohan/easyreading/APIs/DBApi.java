@@ -56,6 +56,13 @@ public interface DBApi {
      */
     Observable<Cursor> checkUserExistbyAccount(String account);
 
+    /**
+     * 根据用户的ID查询用户
+     * @param id
+     * @return
+     */
+    Observable<Cursor> getUserById(int id);
+
     /*----------------------------------------Mybook---------------------------------------*/
     /**
      * 添加正在阅读的书

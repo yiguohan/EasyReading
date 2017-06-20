@@ -82,6 +82,11 @@ public class DBManager {
             }
 
             @Override
+            public Observable<Cursor> getUserById(int id) {
+                return new ObservableJust<Cursor>(db.rawQuery("select * from User where id = ?",new String[]{String.valueOf(id)}));
+            }
+
+            @Override
             public Observable<Long> insertMyBook(MyBook book) {
                 ContentValues contentValues = new ContentValues();
                 contentValues.put("bookId",book.getBookId());
