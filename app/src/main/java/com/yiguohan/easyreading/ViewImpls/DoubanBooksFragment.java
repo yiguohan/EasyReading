@@ -38,7 +38,7 @@ public class DoubanBooksFragment extends BaseFragment implements IGetBookListVie
                              Bundle savedInstanceState) {
 //        this.bookTag = savedInstanceState.getString("TAG","Design");
         this.bookTag = this.getArguments().getString("TAG","Design");
-        initData();
+//        initData();
         View view = inflater.inflate(R.layout.fragment_douban_books, container, false);
         RecyclerView recyclerView = (RecyclerView)view.findViewById(R.id.douban_recyclerView);
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(),3);
@@ -63,4 +63,14 @@ public class DoubanBooksFragment extends BaseFragment implements IGetBookListVie
         doubanBooksPresenter.getBooksByTag(this,bookTag);
     }
 
+    @Override
+    public void isOnLine() {
+        super.isOnLine();
+        initData();
+    }
+
+    @Override
+    public void isOffLine() {
+        super.isOffLine();
+    }
 }

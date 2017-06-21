@@ -3,6 +3,7 @@
     package="com.yiguohan.easyreading">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:name=".Base.EasyReadingApplication"
@@ -20,9 +21,9 @@
             android:name=".ViewImpls.LoginActivity"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
@@ -30,6 +31,11 @@
             android:launchMode="standard"
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".ViewImpls.ReadingActivity" />
+
+        <receiver
+            android:name=".Utils.NetworkConnectedReceiver"
+            android:enabled="true"
+            android:exported="true"/>
     </application>
 
 </manifest>
