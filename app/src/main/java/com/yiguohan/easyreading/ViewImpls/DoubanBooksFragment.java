@@ -36,6 +36,8 @@ public class DoubanBooksFragment extends BaseFragment implements IGetBookListVie
 
     private String bookTag;
 
+    private int currentItemsCount = 0;//记录已经返回的数据个数
+
     public DoubanBooksFragment() {
     }
 
@@ -64,24 +66,28 @@ public class DoubanBooksFragment extends BaseFragment implements IGetBookListVie
         recyclerView.addOnScrollListener(new EndlessOnScrollListener(layoutManager) {
             @Override
             public void onLoadMore() {
-                Toast.makeText(getContext(), "Loading", Toast.LENGTH_SHORT).show();
+                initData(currentItemsCount);
             }
         });
     }
 
     @Override
     public void getBookListSuccess(BookList list, boolean isMore) {
-        bookList.clear();
         for (Book b :
                 list.getBooks()) {
             bookList.add(b);
         }
+        currentItemsCount += 20;
         adapter.notifyDataSetChanged();
     }
 
     private void initData() {
+        initData(0);
+    }
+
+    private void initData(int currentItemsCount) {
         DoubanBooksPresenter doubanBooksPresenter = new DoubanBooksPresenter(getContext());
-        doubanBooksPresenter.getBooksByTag(this, bookTag);
+        doubanBooksPresenter.getBooksByTag(this, bookTag, currentItemsCount);
     }
 
     @Override

@@ -38,8 +38,26 @@ public class DoubanBooksPresenter extends BasePresenter {
 
     }
 
+    /**
+     * 根据标签内容查找相关书籍,start默认值为0
+     *
+     * @param view
+     * @param tag
+     */
     public void getBooksByTag(final IGetBookListView view, String tag) {
-        doubanService.getBookByTag(tag)
+        getBooksByTag(view, tag, 0);
+
+    }
+
+    /**
+     * 根据标签内容查找相关书籍
+     *
+     * @param view  此方法对应的View
+     * @param tag   查询的标签
+     * @param start 开始返回的偏移量
+     */
+    public void getBooksByTag(final IGetBookListView view, String tag, int start) {
+        doubanService.getBookByTag(tag, start)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<BookList>() {
@@ -48,7 +66,6 @@ public class DoubanBooksPresenter extends BasePresenter {
                         displayBookList(view, list);
                     }
                 });
-
     }
 
     public void getBooksByKeyWord(final IGetBookListView view, String keyword) {

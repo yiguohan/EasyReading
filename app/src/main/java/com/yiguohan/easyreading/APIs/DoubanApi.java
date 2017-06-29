@@ -19,6 +19,7 @@ public interface DoubanApi {
 
     /**
      * 通过图书Id来检索图书信息
+     *
      * @param id
      * @return
      */
@@ -39,11 +40,12 @@ public interface DoubanApi {
      * 通过图书标签来查询图书信息
      * 用于用户输入指定标签查询
      *
-     * @param tag
+     * @param tag   搜索的标签
+     * @param start 开始的数目（用于进行分页）
      * @return
      */
     @GET("v2/book/search")
-    Observable<BookList> getBookByTag(@Query("tag") String tag);
+    Observable<BookList> getBookByTag(@Query("tag") String tag, @Query("start") int start);
 
     /**
      * 通过关键字查询图书信息
