@@ -54,5 +54,5 @@ public interface DoubanApi {
      * @return
      */
     @GET("v2/book/search")
-    Observable<BookList> getBookByKeyword(@Query("q") String keyword);
+    Observable<BookList> getBookByKeyword(@Query("q") String keyword, @Query("start") int start);
 }

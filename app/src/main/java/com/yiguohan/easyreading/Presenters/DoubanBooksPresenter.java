@@ -68,9 +68,19 @@ public class DoubanBooksPresenter extends BasePresenter {
                 });
     }
 
+    /**
+     * 根据关键字内容查找相关书籍,start默认值为0
+     *
+     * @param view
+     * @param keyword
+     */
     public void getBooksByKeyWord(final IGetBookListView view, String keyword) {
+        getBooksByKeyWord(view, keyword, 0);
+    }
 
-        doubanService.getBookByKeyword(keyword)
+    public void getBooksByKeyWord(final IGetBookListView view, String keyword, int start) {
+
+        doubanService.getBookByKeyword(keyword, start)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<BookList>() {
