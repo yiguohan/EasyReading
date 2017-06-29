@@ -2,6 +2,7 @@ package com.yiguohan.easyreading.ViewImpls;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -28,7 +29,10 @@ import java.util.List;
 public class DoubanBooksFragment extends BaseFragment implements IGetBookListView {
 
     List<Book> bookList = new ArrayList<Book>();
+
     DoubanBookAdapter adapter;
+
+    private RecyclerView recyclerView;
 
     private String bookTag;
 
@@ -38,22 +42,31 @@ public class DoubanBooksFragment extends BaseFragment implements IGetBookListVie
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-//        this.bookTag = savedInstanceState.getString("TAG","Design");
+        return inflater.inflate(R.layout.fragment_douban_books, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
         this.bookTag = this.getArguments().getString("TAG", "Design");
-//        initData();
-        View view = inflater.inflate(R.layout.fragment_douban_books, container, false);
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.douban_recyclerView);
+
+        recyclerView = (RecyclerView) view.findViewById(R.id.douban_recyclerView);
+
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 3);
+
         recyclerView.setLayoutManager(layoutManager);
+
         adapter = new DoubanBookAdapter(bookList);
+
         recyclerView.setAdapter(adapter);
+
         recyclerView.addOnScrollListener(new EndlessOnScrollListener(layoutManager) {
             @Override
             public void onLoadMore() {
-                Toast.makeText(getContext(),"Loading",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Loading", Toast.LENGTH_SHORT).show();
             }
         });
-        return view;
     }
 
     @Override
