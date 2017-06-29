@@ -8,11 +8,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.yiguohan.easyreading.Adapters.DoubanBookAdapter;
 import com.yiguohan.easyreading.Base.BaseFragment;
 import com.yiguohan.easyreading.Beans.DoubanBooks.Book;
 import com.yiguohan.easyreading.Beans.DoubanBooks.BookList;
+import com.yiguohan.easyreading.Listeners.EndlessOnScrollListener;
 import com.yiguohan.easyreading.Presenters.DoubanBooksPresenter;
 import com.yiguohan.easyreading.R;
 import com.yiguohan.easyreading.Views.IGetBookListView;
@@ -23,7 +25,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DoubanBooksFragment extends BaseFragment implements IGetBookListView{
+public class DoubanBooksFragment extends BaseFragment implements IGetBookListView {
 
     List<Book> bookList = new ArrayList<Book>();
     DoubanBookAdapter adapter;
@@ -37,14 +39,20 @@ public class DoubanBooksFragment extends BaseFragment implements IGetBookListVie
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 //        this.bookTag = savedInstanceState.getString("TAG","Design");
-        this.bookTag = this.getArguments().getString("TAG","Design");
+        this.bookTag = this.getArguments().getString("TAG", "Design");
 //        initData();
         View view = inflater.inflate(R.layout.fragment_douban_books, container, false);
-        RecyclerView recyclerView = (RecyclerView)view.findViewById(R.id.douban_recyclerView);
-        GridLayoutManager layoutManager = new GridLayoutManager(getContext(),3);
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.douban_recyclerView);
+        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 3);
         recyclerView.setLayoutManager(layoutManager);
         adapter = new DoubanBookAdapter(bookList);
         recyclerView.setAdapter(adapter);
+        recyclerView.addOnScrollListener(new EndlessOnScrollListener(layoutManager) {
+            @Override
+            public void onLoadMore() {
+                Toast.makeText(getContext(),"Loading",Toast.LENGTH_SHORT).show();
+            }
+        });
         return view;
     }
 
@@ -58,9 +66,9 @@ public class DoubanBooksFragment extends BaseFragment implements IGetBookListVie
         adapter.notifyDataSetChanged();
     }
 
-    private void initData(){
+    private void initData() {
         DoubanBooksPresenter doubanBooksPresenter = new DoubanBooksPresenter(getContext());
-        doubanBooksPresenter.getBooksByTag(this,bookTag);
+        doubanBooksPresenter.getBooksByTag(this, bookTag);
     }
 
     @Override
