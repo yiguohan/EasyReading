@@ -12,10 +12,7 @@
             android:id="@+id/nav_statics"
             android:title="阅读效率" />
         <item
-            android:id="@+id/nav_copyright"
-            android:title="版权" />
-        <item
             android:id="@+id/nav_about"
-            android:title="关于作者" />
+            android:title="关于" />
     </group>
 </menu>

@@ -76,9 +76,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             case R.id.nav_statics:
                 replaceFragment(new StaticsFragment());
                 break;
-            case R.id.nav_copyright:
-                mDrawerLayout.closeDrawers();
-                break;
             case R.id.nav_about:
                 mDrawerLayout.closeDrawers();
                 break;
