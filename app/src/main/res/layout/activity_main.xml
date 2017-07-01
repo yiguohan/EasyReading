@@ -21,6 +21,16 @@
         android:layout_gravity="start"
         app:menu="@menu/nav_menu">
 
+
+        <Button
+            android:id="@+id/btn_Logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="退出登录"
+            android:textColor="#FFFFFF"
+            android:background="#FB2436"
+            android:layout_gravity="bottom"/>
+
     </android.support.design.widget.NavigationView>
 
 </android.support.v4.widget.DrawerLayout>

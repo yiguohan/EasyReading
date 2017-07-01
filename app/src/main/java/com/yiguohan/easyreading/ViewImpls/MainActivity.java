@@ -1,5 +1,6 @@
 package com.yiguohan.easyreading.ViewImpls;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,9 +10,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.yiguohan.easyreading.Base.ActivityCollector;
 import com.yiguohan.easyreading.Base.BaseActivity;
 import com.yiguohan.easyreading.Base.BaseFragment;
 import com.yiguohan.easyreading.Base.EasyReadingApplication;
@@ -28,7 +31,7 @@ import org.w3c.dom.Text;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, IGetDataView {
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener,IGetDataView {
 
     private FragmentManager fragmentManager;
 
@@ -41,6 +44,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @BindView(R.id.main_nav_View)
     NavigationView navigationView;
+
+    @BindView(R.id.btn_Logout)
+    Button btn_Logout;
 
 
     @Override
@@ -56,6 +62,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         databasePresenter = new DatabasePresenter(this);
         databasePresenter.getUserById(this, Integer.valueOf(EasyReadingApplication.getCurrentUserId()));
         Util.setHelloSlogan(textView);
+
+        btn_Logout.setOnClickListener(this);
 
         //设置初始菜单选择项和初始Fragment
         navigationView.setNavigationItemSelectedListener(this);
@@ -81,6 +89,17 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 break;
         }
         return true;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btn_Logout:
+                ActivityCollector.finishAll();
+                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 
     /**
