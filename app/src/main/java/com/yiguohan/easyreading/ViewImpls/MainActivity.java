@@ -32,7 +32,7 @@ import org.w3c.dom.Text;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener,IGetDataView {
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, IGetDataView {
 
     private FragmentManager fragmentManager;
 
@@ -57,7 +57,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
+        //// TODO: 2017/7/2 ActionBar会导致打开不兼容的Activity崩溃，此处需要换成ToolBar
         actionBar = getSupportActionBar();
         actionBar.setTitle("首页");
 
@@ -103,10 +103,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btn_Logout:
                 ActivityCollector.finishAll();
-                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);
                 break;
         }
@@ -127,9 +127,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     public void getDataSuccess(Cursor cursor) {
-        if (cursor.getCount() == 1){
+        if (cursor.getCount() == 1) {
             cursor.moveToFirst();
-            Util.setHelloSlogan(textView,cursor.getString(cursor.getColumnIndex("account")));
+            Util.setHelloSlogan(textView, cursor.getString(cursor.getColumnIndex("account")));
         }
     }
 
