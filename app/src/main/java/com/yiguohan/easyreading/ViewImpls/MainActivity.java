@@ -8,6 +8,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -37,6 +38,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     private TextView textView;
 
+    private ActionBar actionBar;
+
     private DatabasePresenter databasePresenter;
 
     @BindView(R.id.main_DrawerLayout)
@@ -54,6 +57,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        actionBar = getSupportActionBar();
+        actionBar.setTitle("首页");
 
         //获取HeaderView 更改用户名（如果直接FindViewById会Crash）
         View headerView = navigationView.inflateHeaderView(R.layout.nav_header);
@@ -77,12 +83,15 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         switch (item.getItemId()) {
             case R.id.nav_home:
                 replaceFragment(new HomeFragment());
+                actionBar.setTitle("首页");
                 break;
             case R.id.nav_book:
                 replaceFragment(new CurrentReadingFragment());
+                actionBar.setTitle("我的阅读");
                 break;
             case R.id.nav_statics:
                 replaceFragment(new StaticsFragment());
+                actionBar.setTitle("阅读效率");
                 break;
             case R.id.nav_about:
                 mDrawerLayout.closeDrawers();
