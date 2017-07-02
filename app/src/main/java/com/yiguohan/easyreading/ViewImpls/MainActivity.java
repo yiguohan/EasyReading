@@ -94,7 +94,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 actionBar.setTitle("阅读效率");
                 break;
             case R.id.nav_about:
-                mDrawerLayout.closeDrawers();
+                replaceFragment(new AboutFragment());
+                actionBar.setTitle("关于");
                 break;
         }
         return true;
