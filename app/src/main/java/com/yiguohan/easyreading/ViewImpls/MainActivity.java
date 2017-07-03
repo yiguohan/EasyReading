@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
@@ -62,7 +63,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-        toolbar.setTitle("首页");
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.menu);
+        actionBar.setTitle("首页");
+
 
         //获取HeaderView 更改用户名（如果直接FindViewById会Crash）
         View headerView = navigationView.inflateHeaderView(R.layout.nav_header);
@@ -79,6 +84,16 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         navigationView.setCheckedItem(R.id.nav_home);
         fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().add(R.id.main_FrameLayout, new HomeFragment()).commit();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                mDrawerLayout.openDrawer(GravityCompat.START);
+                break;
+        }
+        return true;
     }
 
     @Override
