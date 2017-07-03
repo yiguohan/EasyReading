@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -38,9 +39,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     private TextView textView;
 
-    private ActionBar actionBar;
+
 
     private DatabasePresenter databasePresenter;
+
+    @BindView(R.id.main_ToolBar)
+    Toolbar toolbar;
 
     @BindView(R.id.main_DrawerLayout)
     DrawerLayout mDrawerLayout;
@@ -57,9 +61,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        //// TODO: 2017/7/2 ActionBar会导致打开不兼容的Activity崩溃，此处需要换成ToolBar
-        actionBar = getSupportActionBar();
-        actionBar.setTitle("首页");
+        setSupportActionBar(toolbar);
+        toolbar.setTitle("首页");
 
         //获取HeaderView 更改用户名（如果直接FindViewById会Crash）
         View headerView = navigationView.inflateHeaderView(R.layout.nav_header);
@@ -83,19 +86,19 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         switch (item.getItemId()) {
             case R.id.nav_home:
                 replaceFragment(new HomeFragment());
-                actionBar.setTitle("首页");
+                toolbar.setTitle("首页");
                 break;
             case R.id.nav_book:
                 replaceFragment(new CurrentReadingFragment());
-                actionBar.setTitle("我的阅读");
+                toolbar.setTitle("我的阅读");
                 break;
             case R.id.nav_statics:
                 replaceFragment(new StaticsFragment());
-                actionBar.setTitle("阅读效率");
+                toolbar.setTitle("阅读效率");
                 break;
             case R.id.nav_about:
                 replaceFragment(new AboutFragment());
-                actionBar.setTitle("关于");
+                toolbar.setTitle("关于");
                 break;
         }
         return true;

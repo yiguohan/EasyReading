@@ -7,11 +7,28 @@
     android:layout_height="match_parent"
     tools:context="com.yiguohan.easyreading.ViewImpls.MainActivity">
 
-    <FrameLayout
-        android:id="@+id/main_FrameLayout"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </FrameLayout>
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/main_ToolBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+        <FrameLayout
+            android:id="@+id/main_FrameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+        </FrameLayout>
+
+    </LinearLayout>
 
 
     <android.support.design.widget.NavigationView
@@ -26,10 +43,10 @@
             android:id="@+id/btn_Logout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="退出登录"
-            android:textColor="#FFFFFF"
+            android:layout_gravity="bottom"
             android:background="#FB2436"
-            android:layout_gravity="bottom"/>
+            android:text="退出登录"
+            android:textColor="#FFFFFF" />
 
     </android.support.design.widget.NavigationView>
 
