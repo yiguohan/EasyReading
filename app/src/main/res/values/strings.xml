@@ -3,4 +3,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="github">https://github.com/yiguohan</string>
+    <string name="blog">http://weibo.com/519920207</string>
+    <string name="email">yiguohan@gmail.com</string>
+    <string name="author_desc">简介</string>
 </resources>
