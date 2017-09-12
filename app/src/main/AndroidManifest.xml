@@ -3,7 +3,7 @@
     package="com.yiguohan.easyreading">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name=".Base.EasyReadingApplication"
@@ -35,7 +35,9 @@
         <receiver
             android:name=".Utils.NetworkConnectedReceiver"
             android:enabled="true"
-            android:exported="true"/>
+            android:exported="true" />
+
+        <activity android:name=".ViewImpls.EntryActivity"></activity>
     </application>
 
 </manifest>
