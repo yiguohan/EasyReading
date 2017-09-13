@@ -37,6 +37,7 @@ import com.yiguohan.easyreading.Widgets.StatusBarView;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
@@ -52,6 +53,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private DatabasePresenter databasePresenter;
 
     private List<BaseFragment> fragmentList;
+
+    private static final int FRAGMENT_COUNT = 5;
 
     @BindView(R.id.main_ToolBar)
     Toolbar toolbar;
@@ -106,6 +109,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             case R.id.nav_settings:
                 replaceFragment(3);
                 toolbar.setTitle("设置");
+                break;
             case R.id.nav_about:
                 replaceFragment(4);
                 toolbar.setTitle("关于");
@@ -179,10 +183,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         if (fragmentList == null) {
             fragmentList = new ArrayList<BaseFragment>();
         }
-        //向List中添加空对象，等到需要使用的时候再进行初始化
-        for (int i = 0; i < 5; i++) {
-            fragmentList.add(null);
-        }
+        fragmentList.add(new HomeFragment());
+        fragmentList.add(new CurrentReadingFragment());
+        fragmentList.add(new StaticsFragment());
+        fragmentList.add(new SettingsFragment());
+        fragmentList.add(new AboutFragment());
     }
 
     /**
@@ -205,7 +210,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
      */
     private void replaceFragment(int index) {
         if (fragmentList == null) {
-            return;
+            initFragmentList();
+        }
+        if (fragmentList.size() < FRAGMENT_COUNT) {
+            fragmentList = null;
+            initFragmentList();
         }
         if (fragmentList.get(index) == null) {
             switch (index) {
