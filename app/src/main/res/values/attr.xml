@@ -10,4 +10,7 @@
         <attr name="pathColor" format="color" />
     </declare-styleable>
 
+    <attr name="easyBackgroud" format="color"/>
+    <attr name="easyTextColor" format="color"/>
+
 </resources>

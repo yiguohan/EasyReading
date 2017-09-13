@@ -8,4 +8,21 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="DayTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="easyBackground">@android:color/white</item>
+        <item name="easyTextColor">@android:color/black</item>
+    </style>
+
+    <style name="NightTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">#3F3F3F</item>
+        <item name="colorPrimaryDark">#3A3A3A</item>
+        <item name="colorAccent">#868686</item>
+        <item name="easyBackground">#3F3F3F</item>
+        <item name="easyTextColor">#8A9599</item>
+    </style>
+
 </resources>
+
