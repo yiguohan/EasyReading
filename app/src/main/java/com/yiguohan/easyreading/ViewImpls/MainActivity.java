@@ -83,7 +83,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         initData();
         initView();
         Util.setHelloSlogan(textView);
-        StatusBarUtil.setColorNoTranslucentForDrawerLayout(this, mDrawerLayout, ThemeUtil.getThemeColor());
+        StatusBarUtil.transParentStatusBar(this);
     }
 
     @Override
