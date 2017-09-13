@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -60,6 +62,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     public int currentFragmentPosition = 0;
 
+    private String toolBarTitle;
+
     @BindView(R.id.main_ToolBar)
     Toolbar toolbar;
 
@@ -78,6 +82,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         super.onCreate(savedInstanceState);
         if (savedInstanceState != null) {
             currentFragmentPosition = savedInstanceState.getInt("currentFragmentPosition", 0);
+            toolBarTitle = savedInstanceState.getString("toolBarTitle", "首页");
         }
         theme = ThemeUtil.getThemeColor();
         setTheme(theme);
@@ -94,6 +99,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         super.onSaveInstanceState(outState);
         ThemeUtil.setThemeColor(theme);
         outState.putInt("currentFragmentPosition", currentFragmentPosition);
+        outState.putString("toolBarTitle", toolBarTitle);
     }
 
     @Override
@@ -101,6 +107,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         super.onRestoreInstanceState(savedInstanceState);
         theme = ThemeUtil.getThemeColor();
         currentFragmentPosition = savedInstanceState.getInt("currentFragmentPosition", 0);
+        toolBarTitle = savedInstanceState.getString("toolBarTitle", "首页");
     }
 
     @Override
@@ -119,22 +126,27 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             case R.id.nav_home:
                 replaceFragment(0);
                 toolbar.setTitle("首页");
+                toolBarTitle = "首页";
                 break;
             case R.id.nav_book:
                 replaceFragment(1);
                 toolbar.setTitle("我的阅读");
+                toolBarTitle = "我的阅读";
                 break;
             case R.id.nav_statics:
                 replaceFragment(2);
                 toolbar.setTitle("阅读效率");
+                toolBarTitle = "阅读效率";
                 break;
             case R.id.nav_settings:
                 replaceFragment(3);
                 toolbar.setTitle("设置");
+                toolBarTitle = "设置";
                 break;
             case R.id.nav_about:
                 replaceFragment(4);
                 toolbar.setTitle("关于");
+                toolBarTitle = "关于";
                 break;
         }
         return true;
@@ -178,7 +190,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.menu);
-        actionBar.setTitle("首页");
+        if (!TextUtils.isEmpty(toolBarTitle)) {
+            actionBar.setTitle(toolBarTitle);
+        } else {
+            actionBar.setTitle("首页");
+        }
         //获取HeaderView 更改用户名（如果直接FindViewById会Crash）
         View headerView = navigationView.inflateHeaderView(R.layout.nav_header);
         textView = (TextView) headerView.findViewById(R.id.txt_nav_header_username);
@@ -263,9 +279,20 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         currentFragmentPosition = index;
     }
 
-    public void changeTheme() {
-        theme = (theme == R.style.DayTheme) ? R.style.NightTheme : R.style.DayTheme;
-        this.recreate();
+    public void changeTheme(int themeColor) {
+        switch (themeColor) {
+            case R.style.DayTheme:
+                theme = R.style.DayTheme;
+                recreate();
+                break;
+            case R.style.NightTheme:
+                theme = R.style.NightTheme;
+                recreate();
+                break;
+            default:
+                this.theme = R.style.AppTheme;
+                this.recreate();
+        }
     }
 
 }

@@ -16,6 +16,7 @@ public class ThemeUtil {
 
     public static Context context = EasyReadingApplication.getContext();
     public static int defaultThemeColor = R.style.AppTheme;
+
     /**
      * 获取本机的主题颜色值
      *
@@ -25,6 +26,7 @@ public class ThemeUtil {
         SharedPreferences sharedPreferences = context.getSharedPreferences("ThemeColor", Context.MODE_PRIVATE);
         if (sharedPreferences == null) {
             setThemeColor(defaultThemeColor);
+            setNightModeState(false);
         }
         return sharedPreferences.getInt("themecolor", defaultThemeColor);
     }
@@ -37,6 +39,30 @@ public class ThemeUtil {
     public static void setThemeColor(int color) {
         SharedPreferences.Editor editor = context.getSharedPreferences("ThemeColor", Context.MODE_PRIVATE).edit();
         editor.putInt("themecolor", color);
+        editor.commit();
+    }
+
+    /**
+     * 是否为夜间模式
+     *
+     * @return
+     */
+    public static boolean getNightModeState() {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("ThemeColor", Context.MODE_PRIVATE);
+        if (sharedPreferences == null) {
+            setNightModeState(false);
+        }
+        return sharedPreferences.getBoolean("nightModeState", false);
+    }
+
+    /**
+     * 记录夜间模式状态
+     *
+     * @param isNightMode
+     */
+    public static void setNightModeState(boolean isNightMode) {
+        SharedPreferences.Editor editor = context.getSharedPreferences("ThemeColor", Context.MODE_PRIVATE).edit();
+        editor.putBoolean("nightModeState", isNightMode);
         editor.commit();
     }
 }
