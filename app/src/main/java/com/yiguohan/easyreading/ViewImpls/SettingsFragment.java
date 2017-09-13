@@ -1,11 +1,16 @@
 package com.yiguohan.easyreading.ViewImpls;
 
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +20,15 @@ import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.yiguohan.easyreading.Adapters.ThemeColorAdapter;
 import com.yiguohan.easyreading.Base.BaseFragment;
 import com.yiguohan.easyreading.Base.EasyReadingApplication;
+import com.yiguohan.easyreading.Beans.ThemeColor;
 import com.yiguohan.easyreading.R;
 import com.yiguohan.easyreading.Utils.ThemeUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,10 +43,10 @@ public class SettingsFragment extends BaseFragment {
 
     private MainActivity activity;
 
-    @BindView(R.id.btn_night_mode)
-    Button btnNightMode;
-    @BindView(R.id.btn_change_theme)
-    Button btnChangeTheme;
+    private ThemeColorAdapter themeColorAdapter;
+
+    private List<ThemeColor> themeList = new ArrayList<ThemeColor>();
+
     @BindView(R.id.cv_select_theme)
     CardView cvSelectTheme;
     @BindView(R.id.sw_night_mode)
@@ -63,24 +73,22 @@ public class SettingsFragment extends BaseFragment {
             activity = (MainActivity) getActivity();
         }
         swNightMode.setChecked(ThemeUtil.getNightModeState());
+        initThemeList();
 
     }
 
 
-    @OnClick({R.id.btn_change_theme, R.id.cv_select_theme, R.id.sw_night_mode})
+    @OnClick(R.id.cv_select_theme)
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.btn_change_theme:
-                Toast.makeText(EasyReadingApplication.getContext(), "更改主题", Toast.LENGTH_SHORT).show();
-                break;
             case R.id.cv_select_theme:
-                Toast.makeText(EasyReadingApplication.getContext(), "更改主题", Toast.LENGTH_SHORT).show();
+                initThemeSelector();
                 break;
             case R.id.sw_night_mode:
                 if (activity != null) {
                     if (ThemeUtil.getNightModeState()) {
                         ThemeUtil.setNightModeState(false);
-                        activity.changeTheme(R.style.DayTheme);
+                        activity.changeTheme(R.style.AppTheme);
 
                     } else {
                         ThemeUtil.setNightModeState(true);
@@ -89,5 +97,45 @@ public class SettingsFragment extends BaseFragment {
                 }
                 break;
         }
+    }
+
+    private void initThemeSelector() {
+        //TODO
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_theme_selector, null, false);
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rv_themeselect);
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 4));
+        recyclerView.setAdapter(themeColorAdapter);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("选择主题").setView(view).setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (activity != null) {
+                    switch (ThemeUtil.getThemePosition()) {
+                        case 0:
+                            if (ThemeUtil.getNightModeState()) {
+                                ThemeUtil.setNightModeState(false);
+                            }
+                            activity.changeTheme(R.style.AppTheme);
+                            break;
+//                        case 1:
+//                            ThemeUtil.setNightModeState(false);
+//                            activity.changeTheme(R.style.RedTheme);
+//                            break;
+                    }
+                }
+            }
+        }).show();
+    }
+
+    /**
+     * 初始化Theme数据
+     */
+    private void initThemeList() {
+        themeColorAdapter = new ThemeColorAdapter();
+
+        themeList.add(new ThemeColor(R.style.AppTheme));
+
+        themeColorAdapter.setData(themeList);
+        themeColorAdapter.notifyDataSetChanged();
     }
 }

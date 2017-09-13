@@ -80,20 +80,6 @@
             </RelativeLayout>
         </android.support.v7.widget.CardView>
 
-        <Button
-            android:id="@+id/btn_night_mode"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="200dp"
-            android:text="夜间模式" />
-
-        <Button
-            android:id="@+id/btn_change_theme"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="更改主题" />
-
 
     </LinearLayout>
 

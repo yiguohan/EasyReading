@@ -65,4 +65,19 @@ public class ThemeUtil {
         editor.putBoolean("nightModeState", isNightMode);
         editor.commit();
     }
+
+    public static int getThemePosition(){
+        SharedPreferences sharedPreferences = context.getSharedPreferences("ThemeColor", Context.MODE_PRIVATE);
+        if (sharedPreferences == null) {
+            setThemePosition(0);
+            setNightModeState(false);
+        }
+        return sharedPreferences.getInt("themePosition", 0);
+    }
+
+    public static void setThemePosition(int position){
+        SharedPreferences.Editor editor = context.getSharedPreferences("ThemeColor", Context.MODE_PRIVATE).edit();
+        editor.putInt("themePosition", position);
+        editor.commit();
+    }
 }
