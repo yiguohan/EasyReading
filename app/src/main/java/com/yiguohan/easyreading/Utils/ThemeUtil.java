@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 
 import com.yiguohan.easyreading.Base.EasyReadingApplication;
+import com.yiguohan.easyreading.R;
 
 /**
  * Created by yiguohan.
@@ -14,7 +15,7 @@ import com.yiguohan.easyreading.Base.EasyReadingApplication;
 public class ThemeUtil {
 
     public static Context context = EasyReadingApplication.getContext();
-    public static int defaultThemeColor = Color.TRANSPARENT;
+    public static int defaultThemeColor = R.style.AppTheme;
     /**
      * 获取本机的主题颜色值
      *

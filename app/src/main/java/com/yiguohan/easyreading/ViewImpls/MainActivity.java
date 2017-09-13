@@ -58,6 +58,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     private static int theme = R.style.DayTheme;
 
+    public int currentFragmentPosition = 0;
+
     @BindView(R.id.main_ToolBar)
     Toolbar toolbar;
 
@@ -75,9 +77,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (savedInstanceState != null) {
-            theme = savedInstanceState.getInt("theme");
-            setTheme(theme);//setTheme一定放在setContentView之前
+            currentFragmentPosition = savedInstanceState.getInt("currentFragmentPosition", 0);
         }
+        theme = ThemeUtil.getThemeColor();
+        setTheme(theme);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         initData();
@@ -89,15 +92,15 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt("theme", theme);
+        ThemeUtil.setThemeColor(theme);
+        outState.putInt("currentFragmentPosition", currentFragmentPosition);
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        if (savedInstanceState != null) {
-            theme = savedInstanceState.getInt("theme");
-        }
+        theme = ThemeUtil.getThemeColor();
+        currentFragmentPosition = savedInstanceState.getInt("currentFragmentPosition", 0);
     }
 
     @Override
@@ -183,7 +186,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setCheckedItem(R.id.nav_home);
         fragmentManager = getSupportFragmentManager();
-        replaceFragment(0);
+        replaceFragment(currentFragmentPosition);
     }
 
     /**
@@ -257,6 +260,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             }
         }
         replaceFragment(fragmentList.get(index));
+        currentFragmentPosition = index;
     }
 
     public void changeTheme() {
