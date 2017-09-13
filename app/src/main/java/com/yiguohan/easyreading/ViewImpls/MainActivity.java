@@ -36,17 +36,22 @@ import com.yiguohan.easyreading.Widgets.StatusBarView;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, IGetDataView {
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, IGetDataView {
 
     private FragmentManager fragmentManager;
 
     private TextView textView;
 
-
     private DatabasePresenter databasePresenter;
+
+    private List<BaseFragment> fragmentList;
 
     @BindView(R.id.main_ToolBar)
     Toolbar toolbar;
@@ -66,29 +71,51 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        initData();
+        initView();
+        Util.setHelloSlogan(textView);
+        StatusBarUtil.setColorNoTranslucentForDrawerLayout(this, mDrawerLayout, ThemeUtil.getThemeColor());
+    }
+
+    /**
+     * 初始化控件
+     */
+    private void initView() {
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.menu);
         actionBar.setTitle("首页");
-
-        StatusBarUtil.setColorNoTranslucentForDrawerLayout(this,mDrawerLayout, ThemeUtil.getThemeColor());
-
         //获取HeaderView 更改用户名（如果直接FindViewById会Crash）
         View headerView = navigationView.inflateHeaderView(R.layout.nav_header);
         textView = (TextView) headerView.findViewById(R.id.txt_nav_header_username);
-        ///// TODO: 2017/5/23 根据Id去SharedPreference中取账户名
-        databasePresenter = new DatabasePresenter(this);
-        databasePresenter.getUserById(this, Integer.valueOf(EasyReadingApplication.getCurrentUserId()));
-        Util.setHelloSlogan(textView);
-
-        btn_Logout.setOnClickListener(this);
-
         //设置初始菜单选择项和初始Fragment
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setCheckedItem(R.id.nav_home);
         fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().add(R.id.main_FrameLayout, new HomeFragment()).commit();
+        replaceFragment(0);
+    }
+
+    /**
+     * 初始化数据相关对象
+     */
+    private void initData() {
+        databasePresenter = new DatabasePresenter(this);
+        databasePresenter.getUserById(this, Integer.valueOf(EasyReadingApplication.getCurrentUserId()));
+        initFragmentList();
+    }
+
+    /**
+     * 初始化Fragment
+     */
+    private void initFragmentList() {
+        if (fragmentList == null) {
+            fragmentList = new ArrayList<BaseFragment>();
+        }
+        //向List中添加空对象，等到需要使用的时候再进行初始化
+        for (int i = 0; i < 4; i++) {
+            fragmentList.add(null);
+        }
     }
 
     @Override
@@ -105,34 +132,23 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_home:
-                replaceFragment(new HomeFragment());
+                replaceFragment(0);
                 toolbar.setTitle("首页");
                 break;
             case R.id.nav_book:
-                replaceFragment(new CurrentReadingFragment());
+                replaceFragment(1);
                 toolbar.setTitle("我的阅读");
                 break;
             case R.id.nav_statics:
-                replaceFragment(new StaticsFragment());
+                replaceFragment(2);
                 toolbar.setTitle("阅读效率");
                 break;
             case R.id.nav_about:
-                replaceFragment(new AboutFragment());
+                replaceFragment(3);
                 toolbar.setTitle("关于");
                 break;
         }
         return true;
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_Logout:
-                ActivityCollector.finishAll();
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
-                break;
-        }
     }
 
     /**
@@ -148,6 +164,36 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 .commit();
     }
 
+    /**
+     * 根据index替换Fragment,同时实现了懒加载。
+     *
+     * @param index
+     */
+    private void replaceFragment(int index) {
+        if (fragmentList == null) {
+            return;
+        }
+        if (fragmentList.get(index) == null) {
+            switch (index) {
+                case 0:
+                    fragmentList.add(0, new HomeFragment());
+                    break;
+                case 1:
+                    fragmentList.add(1, new CurrentReadingFragment());
+                    break;
+                case 2:
+                    fragmentList.add(2, new StaticsFragment());
+                    break;
+                case 3:
+                    fragmentList.add(3, new AboutFragment());
+                    break;
+                default:
+                    break;
+            }
+        }
+        replaceFragment(fragmentList.get(index));
+    }
+
     @Override
     public void getDataSuccess(Cursor cursor) {
         if (cursor.getCount() == 1) {
@@ -159,5 +205,22 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     public void getDataFail() {
 
+    }
+
+    /**
+     * 绑定按钮监听
+     *
+     * @param view
+     */
+    //TODO 未绑定监听
+    @OnClick(R.id.btn_Logout)
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_Logout:
+                ActivityCollector.finishAll();
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 }
