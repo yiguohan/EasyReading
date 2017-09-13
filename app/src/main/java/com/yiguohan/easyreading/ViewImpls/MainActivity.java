@@ -77,6 +77,73 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         StatusBarUtil.setColorNoTranslucentForDrawerLayout(this, mDrawerLayout, ThemeUtil.getThemeColor());
     }
 
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                mDrawerLayout.openDrawer(GravityCompat.START);
+                break;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.nav_home:
+                replaceFragment(0);
+                toolbar.setTitle("首页");
+                break;
+            case R.id.nav_book:
+                replaceFragment(1);
+                toolbar.setTitle("我的阅读");
+                break;
+            case R.id.nav_statics:
+                replaceFragment(2);
+                toolbar.setTitle("阅读效率");
+                break;
+            case R.id.nav_settings:
+                replaceFragment(3);
+                toolbar.setTitle("设置");
+            case R.id.nav_about:
+                replaceFragment(4);
+                toolbar.setTitle("关于");
+                break;
+        }
+        return true;
+    }
+
+
+    @Override
+    public void getDataSuccess(Cursor cursor) {
+        if (cursor.getCount() == 1) {
+            cursor.moveToFirst();
+            Util.setHelloSlogan(textView, cursor.getString(cursor.getColumnIndex("account")));
+        }
+    }
+
+    @Override
+    public void getDataFail() {
+
+    }
+
+    /**
+     * 绑定按钮监听
+     *
+     * @param view
+     */
+    @OnClick(R.id.btn_Logout)
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_Logout:
+                ActivityCollector.finishAll();
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+                break;
+        }
+    }
+
     /**
      * 初始化控件
      */
@@ -113,42 +180,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             fragmentList = new ArrayList<BaseFragment>();
         }
         //向List中添加空对象，等到需要使用的时候再进行初始化
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 5; i++) {
             fragmentList.add(null);
         }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                mDrawerLayout.openDrawer(GravityCompat.START);
-                break;
-        }
-        return true;
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.nav_home:
-                replaceFragment(0);
-                toolbar.setTitle("首页");
-                break;
-            case R.id.nav_book:
-                replaceFragment(1);
-                toolbar.setTitle("我的阅读");
-                break;
-            case R.id.nav_statics:
-                replaceFragment(2);
-                toolbar.setTitle("阅读效率");
-                break;
-            case R.id.nav_about:
-                replaceFragment(3);
-                toolbar.setTitle("关于");
-                break;
-        }
-        return true;
     }
 
     /**
@@ -185,7 +219,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                     fragmentList.add(2, new StaticsFragment());
                     break;
                 case 3:
-                    fragmentList.add(3, new AboutFragment());
+                    fragmentList.add(3, new SettingsFragment());
+                    break;
+                case 4:
+                    fragmentList.add(4, new AboutFragment());
                     break;
                 default:
                     break;
@@ -194,33 +231,4 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         replaceFragment(fragmentList.get(index));
     }
 
-    @Override
-    public void getDataSuccess(Cursor cursor) {
-        if (cursor.getCount() == 1) {
-            cursor.moveToFirst();
-            Util.setHelloSlogan(textView, cursor.getString(cursor.getColumnIndex("account")));
-        }
-    }
-
-    @Override
-    public void getDataFail() {
-
-    }
-
-    /**
-     * 绑定按钮监听
-     *
-     * @param view
-     */
-    //TODO 未绑定监听
-    @OnClick(R.id.btn_Logout)
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.btn_Logout:
-                ActivityCollector.finishAll();
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
-                break;
-        }
-    }
 }

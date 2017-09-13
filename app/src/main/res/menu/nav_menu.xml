@@ -4,19 +4,23 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:title="首页"
-            android:icon="@drawable/home"/>
+            android:icon="@drawable/home"
+            android:title="首页" />
         <item
             android:id="@+id/nav_book"
-            android:title="我的阅读"
-            android:icon="@drawable/books"/>
+            android:icon="@drawable/books"
+            android:title="我的阅读" />
         <item
             android:id="@+id/nav_statics"
-            android:title="阅读效率"
-            android:icon="@drawable/graph"/>
+            android:icon="@drawable/graph"
+            android:title="阅读效率" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/settings"
+            android:title="设置" />
         <item
             android:id="@+id/nav_about"
-            android:title="关于"
-            android:icon="@drawable/about"/>
+            android:icon="@drawable/about"
+            android:title="关于" />
     </group>
 </menu>
