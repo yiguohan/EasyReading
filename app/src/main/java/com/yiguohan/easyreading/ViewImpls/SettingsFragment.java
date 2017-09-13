@@ -2,6 +2,7 @@ package com.yiguohan.easyreading.ViewImpls;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,8 @@ import butterknife.OnClick;
  */
 public class SettingsFragment extends BaseFragment {
 
+
+    private MainActivity activity;
     @BindView(R.id.btn_night_mode)
     Button btnNightMode;
     @BindView(R.id.btn_change_theme)
@@ -41,14 +44,25 @@ public class SettingsFragment extends BaseFragment {
         return view;
     }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        if (getActivity() instanceof MainActivity) {
+            activity = (MainActivity) getActivity();
+        }
+    }
+
     @OnClick({R.id.btn_night_mode, R.id.btn_change_theme})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_night_mode:
-                Toast.makeText(EasyReadingApplication.getContext(),"夜间模式",Toast.LENGTH_SHORT).show();
+                if (activity != null) {
+                    activity.changeTheme();
+                }
+                Toast.makeText(EasyReadingApplication.getContext(), "夜间模式", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_change_theme:
-                Toast.makeText(EasyReadingApplication.getContext(),"更改主题",Toast.LENGTH_SHORT).show();
+                Toast.makeText(EasyReadingApplication.getContext(), "更改主题", Toast.LENGTH_SHORT).show();
                 break;
         }
     }

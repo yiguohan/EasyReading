@@ -56,6 +56,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     private static final int FRAGMENT_COUNT = 5;
 
+    private static int theme = R.style.DayTheme;
+
     @BindView(R.id.main_ToolBar)
     Toolbar toolbar;
 
@@ -72,6 +74,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            theme = savedInstanceState.getInt("theme");
+            setTheme(theme);//setTheme一定放在setContentView之前
+        }
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         initData();
@@ -80,6 +86,19 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         StatusBarUtil.setColorNoTranslucentForDrawerLayout(this, mDrawerLayout, ThemeUtil.getThemeColor());
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("theme", theme);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if (savedInstanceState != null) {
+            theme = savedInstanceState.getInt("theme");
+        }
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -238,6 +257,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             }
         }
         replaceFragment(fragmentList.get(index));
+    }
+
+    public void changeTheme() {
+        theme = (theme == R.style.DayTheme) ? R.style.NightTheme : R.style.DayTheme;
+        this.recreate();
     }
 
 }
