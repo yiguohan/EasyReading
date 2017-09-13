@@ -4,10 +4,26 @@
     android:layout_height="match_parent"
     tools:context="com.yiguohan.easyreading.ViewImpls.SettingsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_night_mode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="200dp"
+            android:text="夜间模式" />
+
+        <Button
+            android:id="@+id/btn_change_theme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="更改主题" />
+
+
+    </LinearLayout>
 
 </FrameLayout>
