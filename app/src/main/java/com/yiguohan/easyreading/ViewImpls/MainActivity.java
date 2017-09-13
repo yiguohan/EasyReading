@@ -1,7 +1,9 @@
 package com.yiguohan.easyreading.ViewImpls;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -23,11 +25,14 @@ import com.yiguohan.easyreading.Base.BaseFragment;
 import com.yiguohan.easyreading.Base.EasyReadingApplication;
 import com.yiguohan.easyreading.Presenters.DatabasePresenter;
 import com.yiguohan.easyreading.R;
+import com.yiguohan.easyreading.Utils.StatusBarUtil;
+import com.yiguohan.easyreading.Utils.ThemeUtil;
 import com.yiguohan.easyreading.Utils.Util;
 import com.yiguohan.easyreading.ViewImpls.CurrentReadingFragment;
 import com.yiguohan.easyreading.ViewImpls.HomeFragment;
 import com.yiguohan.easyreading.ViewImpls.StaticsFragment;
 import com.yiguohan.easyreading.Views.IGetDataView;
+import com.yiguohan.easyreading.Widgets.StatusBarView;
 
 import org.w3c.dom.Text;
 
@@ -39,7 +44,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private FragmentManager fragmentManager;
 
     private TextView textView;
-
 
 
     private DatabasePresenter databasePresenter;
@@ -68,6 +72,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         actionBar.setHomeAsUpIndicator(R.drawable.menu);
         actionBar.setTitle("首页");
 
+        StatusBarUtil.setColorNoTranslucentForDrawerLayout(this,mDrawerLayout, ThemeUtil.getThemeColor());
 
         //获取HeaderView 更改用户名（如果直接FindViewById会Crash）
         View headerView = navigationView.inflateHeaderView(R.layout.nav_header);
@@ -88,7 +93,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 break;

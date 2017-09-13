@@ -18,7 +18,7 @@ import com.yiguohan.easyreading.UIComponents.StatisticsView;
  */
 public class AboutFragment extends BaseFragment {
 
-    private StatisticsView statisticsView;
+//    private StatisticsView statisticsView;
 
 
     public AboutFragment() {
@@ -36,8 +36,8 @@ public class AboutFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        statisticsView = (StatisticsView)view.findViewById(R.id.staticsView);
-        invalidate(statisticsView);
+//        statisticsView = (StatisticsView)view.findViewById(R.id.staticsView);
+//        invalidate(statisticsView);
     }
 
     private void invalidate(StatisticsView view){
