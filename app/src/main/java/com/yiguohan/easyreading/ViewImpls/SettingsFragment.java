@@ -78,7 +78,7 @@ public class SettingsFragment extends BaseFragment {
     }
 
 
-    @OnClick(R.id.cv_select_theme)
+    @OnClick({R.id.cv_select_theme,R.id.sw_night_mode})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.cv_select_theme:
