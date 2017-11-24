@@ -3,6 +3,8 @@ package com.yiguohan.easyreading.Base;
 import android.app.Application;
 import android.content.Context;
 
+import cn.jpush.android.api.JPushInterface;
+
 /**
  * Created by yiguohan on 2017/5/23.
  * Email:yiguohan@gmail.com
@@ -24,6 +26,11 @@ public class EasyReadingApplication extends Application {
     public void onCreate() {
         super.onCreate();
         context = getApplicationContext();
+        /**
+         * 极光推送API初始化
+         */
+        JPushInterface.setDebugMode(true);//极光推送API设置为Debug模式
+        JPushInterface.init(this);//极光推送API初始化
     }
 
     public static Context getContext(){
