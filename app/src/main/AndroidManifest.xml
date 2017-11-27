@@ -48,6 +48,22 @@
             android:exported="true" />
 
         <activity android:name=".ViewImpls.EntryActivity"></activity>
+
+        <receiver
+            android:name=".Utils.JPushReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTRATION" />
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" />
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" />
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_CLICK_ACTION" />
+                <action android:name="cn.jpush.android.intent.CONNECTION" />
+
+                <category android:name="com.yiguohan.easyreading" />
+            </intent-filter>
+
+        </receiver>
     </application>
 
 </manifest>
