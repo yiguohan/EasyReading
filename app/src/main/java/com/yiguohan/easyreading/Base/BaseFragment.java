@@ -1,6 +1,7 @@
 package com.yiguohan.easyreading.Base;
 
 
+import android.content.Context;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
@@ -23,6 +24,8 @@ public class BaseFragment extends Fragment implements INetworkConnectionView {
     private NetworkConnectedReceiver networkConnectedReceiver;
 
     private IntentFilter intentFilter;
+
+    protected Context mContext = EasyReadingApplication.getContext();
 
     public BaseFragment() {
         // Required empty public constructor

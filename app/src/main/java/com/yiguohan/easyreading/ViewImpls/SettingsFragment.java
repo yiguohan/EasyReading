@@ -34,6 +34,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
+import cn.jpush.android.api.JPushInterface;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -47,10 +48,13 @@ public class SettingsFragment extends BaseFragment {
 
     private List<ThemeColor> themeList = new ArrayList<ThemeColor>();
 
+
     @BindView(R.id.cv_select_theme)
     CardView cvSelectTheme;
     @BindView(R.id.sw_night_mode)
     Switch swNightMode;
+    @BindView(R.id.sw_jpush)
+    Switch swJPush;
 
 
     public SettingsFragment() {
@@ -74,11 +78,12 @@ public class SettingsFragment extends BaseFragment {
         }
         swNightMode.setChecked(ThemeUtil.getNightModeState());
         initThemeList();
+        setJPushServiceState();
 
     }
 
 
-    @OnClick({R.id.cv_select_theme,R.id.sw_night_mode})
+    @OnClick({R.id.cv_select_theme, R.id.sw_night_mode, R.id.sw_jpush})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.cv_select_theme:
@@ -95,6 +100,22 @@ public class SettingsFragment extends BaseFragment {
                         activity.changeTheme(R.style.NightTheme);
                     }
                 }
+                break;
+            case R.id.sw_jpush:
+                if (!JPushInterface.isPushStopped(mContext)) {
+                    //如果极光推送打开则进行stop
+                    JPushInterface.stopPush(mContext);
+                    swJPush.setChecked(false);
+
+                } else if (JPushInterface.isPushStopped(mContext)) {
+                    //如果极光推送关闭则进行resume
+                    JPushInterface.resumePush(mContext);
+                    swJPush.setChecked(true);
+                } else {
+                    throw new IllegalStateException("极光推送状态异常");
+                }
+                break;
+            default:
                 break;
         }
     }
@@ -125,6 +146,17 @@ public class SettingsFragment extends BaseFragment {
                 }
             }
         }).show();
+    }
+
+    /**
+     * 确认极光推送状态并同步设置中的开关
+     */
+    private void setJPushServiceState() {
+        if (!JPushInterface.isPushStopped(mContext)) {
+            swJPush.setChecked(true);
+        } else {
+            swJPush.setChecked(false);
+        }
     }
 
     /**
