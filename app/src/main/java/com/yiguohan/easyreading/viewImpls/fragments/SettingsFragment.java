@@ -1,4 +1,4 @@
-package com.yiguohan.easyreading.viewImpls;
+package com.yiguohan.easyreading.viewImpls.fragments;
 
 
 import android.content.DialogInterface;
@@ -19,6 +19,7 @@ import com.yiguohan.easyreading.base.BaseFragment;
 import com.yiguohan.easyreading.beans.ThemeColor;
 import com.yiguohan.easyreading.R;
 import com.yiguohan.easyreading.utils.ThemeUtil;
+import com.yiguohan.easyreading.viewImpls.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;

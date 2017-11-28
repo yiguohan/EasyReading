@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.yiguohan.easyreading.beans.doubanBooks.Book;
 import com.yiguohan.easyreading.R;
-import com.yiguohan.easyreading.viewImpls.CurrentReadingDetailActivity;
+import com.yiguohan.easyreading.viewImpls.activities.CurrentReadingDetailActivity;
 
 import java.util.List;
 

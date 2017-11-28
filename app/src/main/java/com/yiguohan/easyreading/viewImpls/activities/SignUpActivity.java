@@ -1,4 +1,4 @@
-package com.yiguohan.easyreading.viewImpls;
+package com.yiguohan.easyreading.viewImpls.activities;
 
 import android.content.Intent;
 import android.os.Bundle;

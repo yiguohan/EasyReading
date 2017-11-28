@@ -25,10 +25,10 @@
         android:theme="@style/AppTheme">
         <activity android:name=".viewImpls.MainActivity" />
         <activity android:name=".base.BaseActivity" />
-        <activity android:name=".viewImpls.DoubanBookDetailActivity" />
-        <activity android:name=".viewImpls.CurrentReadingDetailActivity" />
+        <activity android:name=".viewImpls.activities.DoubanBookDetailActivity" />
+        <activity android:name=".viewImpls.activities.CurrentReadingDetailActivity" />
         <activity
-            android:name=".viewImpls.LoginActivity"
+            android:name=".viewImpls.activities.LoginActivity"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,17 +37,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".viewImpls.SignUpActivity"
+            android:name=".viewImpls.activities.SignUpActivity"
             android:launchMode="standard"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".viewImpls.ReadingActivity" />
+        <activity android:name=".viewImpls.activities.ReadingActivity" />
 
         <receiver
             android:name=".utils.NetworkConnectedReceiver"
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".viewImpls.EntryActivity"></activity>
+        <activity android:name=".viewImpls.activities.EntryActivity"></activity>
 
         <receiver
             android:name=".utils.JPushReceiver"

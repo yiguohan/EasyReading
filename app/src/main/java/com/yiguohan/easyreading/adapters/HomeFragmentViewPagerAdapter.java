@@ -5,8 +5,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.yiguohan.easyreading.viewImpls.DoubanBooksFragment;
-import com.yiguohan.easyreading.viewImpls.SearchBooksFragment;
+import com.yiguohan.easyreading.viewImpls.fragments.DoubanBooksFragment;
+import com.yiguohan.easyreading.viewImpls.fragments.SearchBooksFragment;
 
 import java.util.List;
 

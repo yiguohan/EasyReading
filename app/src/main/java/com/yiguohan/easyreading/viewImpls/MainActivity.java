@@ -25,6 +25,12 @@ import com.yiguohan.easyreading.R;
 import com.yiguohan.easyreading.utils.StatusBarUtil;
 import com.yiguohan.easyreading.utils.ThemeUtil;
 import com.yiguohan.easyreading.utils.Util;
+import com.yiguohan.easyreading.viewImpls.activities.LoginActivity;
+import com.yiguohan.easyreading.viewImpls.fragments.AboutFragment;
+import com.yiguohan.easyreading.viewImpls.fragments.CurrentReadingFragment;
+import com.yiguohan.easyreading.viewImpls.fragments.HomeFragment;
+import com.yiguohan.easyreading.viewImpls.fragments.SettingsFragment;
+import com.yiguohan.easyreading.viewImpls.fragments.StaticsFragment;
 import com.yiguohan.easyreading.views.IGetDataView;
 
 import java.util.ArrayList;

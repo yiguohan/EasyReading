@@ -15,9 +15,9 @@ import com.white.progressview.CircleProgressView;
 import com.yiguohan.easyreading.base.EasyReadingApplication;
 import com.yiguohan.easyreading.beans.MyBook;
 import com.yiguohan.easyreading.R;
-import com.yiguohan.easyreading.viewImpls.CurrentReadingDetailActivity;
-import com.yiguohan.easyreading.viewImpls.DoubanBookDetailActivity;
-import com.yiguohan.easyreading.viewImpls.ReadingActivity;
+import com.yiguohan.easyreading.viewImpls.activities.CurrentReadingDetailActivity;
+import com.yiguohan.easyreading.viewImpls.activities.DoubanBookDetailActivity;
+import com.yiguohan.easyreading.viewImpls.activities.ReadingActivity;
 
 import java.util.List;
 

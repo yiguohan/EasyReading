@@ -1,4 +1,4 @@
-package com.yiguohan.easyreading.viewImpls;
+package com.yiguohan.easyreading.viewImpls.fragments;
 
 
 import android.os.Bundle;

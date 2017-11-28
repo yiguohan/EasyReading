@@ -1,4 +1,4 @@
-package com.yiguohan.easyreading.viewImpls;
+package com.yiguohan.easyreading.viewImpls.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,6 +13,7 @@ import com.yiguohan.easyreading.base.EasyReadingApplication;
 import com.yiguohan.easyreading.presenters.DatabasePresenter;
 import com.yiguohan.easyreading.R;
 import com.yiguohan.easyreading.utils.Util;
+import com.yiguohan.easyreading.viewImpls.MainActivity;
 import com.yiguohan.easyreading.views.IGetDataView;
 
 import butterknife.BindView;
