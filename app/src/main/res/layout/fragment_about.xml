@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.yiguohan.easyreading.ViewImpls.AboutFragment">
+    tools:context="com.yiguohan.easyreading.viewImpls.AboutFragment">
 
    <android.support.design.widget.CoordinatorLayout
        android:id="@+id/rootLayout"

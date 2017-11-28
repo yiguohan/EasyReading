@@ -16,19 +16,19 @@
     <uses-permission android:name="com.yiguohan.easyreading.permission.JPUSH_MESSAGE" />
 
     <application
-        android:name=".Base.EasyReadingApplication"
+        android:name=".base.EasyReadingApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ViewImpls.MainActivity" />
-        <activity android:name=".Base.BaseActivity" />
-        <activity android:name=".ViewImpls.DoubanBookDetailActivity" />
-        <activity android:name=".ViewImpls.CurrentReadingDetailActivity" />
+        <activity android:name=".viewImpls.MainActivity" />
+        <activity android:name=".base.BaseActivity" />
+        <activity android:name=".viewImpls.DoubanBookDetailActivity" />
+        <activity android:name=".viewImpls.CurrentReadingDetailActivity" />
         <activity
-            android:name=".ViewImpls.LoginActivity"
+            android:name=".viewImpls.LoginActivity"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,20 +37,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ViewImpls.SignUpActivity"
+            android:name=".viewImpls.SignUpActivity"
             android:launchMode="standard"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".ViewImpls.ReadingActivity" />
+        <activity android:name=".viewImpls.ReadingActivity" />
 
         <receiver
-            android:name=".Utils.NetworkConnectedReceiver"
+            android:name=".utils.NetworkConnectedReceiver"
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".ViewImpls.EntryActivity"></activity>
+        <activity android:name=".viewImpls.EntryActivity"></activity>
 
         <receiver
-            android:name=".Utils.JPushReceiver"
+            android:name=".utils.JPushReceiver"
             android:enabled="true">
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.REGISTRATION" />
