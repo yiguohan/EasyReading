@@ -17,9 +17,13 @@ public class NetworkConnectedReceiver extends BroadcastReceiver {
 
     private INetworkConnectionView connectionView;
 
+    public NetworkConnectedReceiver() {
+    }
+
     public NetworkConnectedReceiver(INetworkConnectionView networkConnectionView) {
 
         connectionView = networkConnectionView;
+
         if (connectionView instanceof BaseActivity) {
             mContext = ((BaseActivity) networkConnectionView);
         } else if (connectionView instanceof BaseFragment) {
